@@ -1,0 +1,16 @@
+.details-container {
+    margin: 15px 140px;
+    width: 100%;
+ 
+
+}
+.details-title p {
+    font-size: 50px;
+    color: rgb(245, 245, 245);
+    padding-bottom: 18px;
+    border-bottom: 1px solid grey;
+}
+
+
+
+

@@ -1,0 +1,44 @@
+.header {
+    width: 100%;
+    display: flex;
+    left: 0px;
+    top: 0px;
+    background: #2A2A2A;
+    justify-content: space-between;
+  }
+  .header-right-list .singin-item-list-item {
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
+    list-style: none;
+    background-color: rgb(0, 125, 252);
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .header-right-list .singin-item {
+    color: #ccc;
+    font-size: 13px;
+    font-family: OpenSans, sans-serif, arial;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .register-list-item {
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .register-item {
+    color: #ccc;
+    font-size: 13px;
+    font-family: OpenSans, sans-serif, arial;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    text-align: center;
+  }

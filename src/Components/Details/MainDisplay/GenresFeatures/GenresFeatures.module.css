@@ -1,0 +1,31 @@
+.genres, .features {
+    padding: 10px 30px;
+    border-left: 1px solid rgb(53, 53, 53);
+    flex-grow: 1;
+    max-width: 50%;
+}
+.genre-features {
+    display: flex;
+    width: 100%;
+}
+.genre-title, .feature-title {
+    color: rgb(128, 128, 128);
+    font-size: 19px;
+    width: 100%;
+    
+}
+.genre-item, .feature-item {
+    color: rgb(245, 245, 245);
+    font-size: 16px;
+    list-style: none;
+    padding-right: 8px;
+    padding-top: 7px;
+}
+
+
+.genre-list, .feature-list {
+    display: flex;
+    padding: 0;
+    margin: 8px 0;
+    flex-wrap: wrap;
+}

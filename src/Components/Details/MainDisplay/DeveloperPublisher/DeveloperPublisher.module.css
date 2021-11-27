@@ -1,0 +1,19 @@
+.dev-gray {
+    color: rgb(128, 128, 128);
+    font-size: 19px;
+}
+.dev-white {
+    color: rgb(245, 245, 245);
+    font-size: 19px;
+    
+}
+.publisher,
+.available,
+.platform {
+    display: flex;
+    justify-content: space-between;
+    margin: 13px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgb(46, 46, 46);
+    flex-direction: column;
+}

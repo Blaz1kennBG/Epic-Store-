@@ -1,0 +1,117 @@
+.card {
+    margin: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 256px;
+    height: 439px;
+    flex-basis: 21%;
+  }
+  
+  .card-image {
+    width: 256px;
+    height: 342px;
+    /* background-color: rgb(83, 83, 83); */
+    top: 5px;
+    left: 0px;
+  /*    overflow: hidden;  */
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    padding-top: 15px;
+  }
+  
+  .card-title {
+    width: 100%;
+    color: rgb(245, 245, 245);
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 22px;
+    opacity: 1;
+    text-align: left;
+  }
+  a {
+    width: 100%;
+    color: rgb(245, 245, 245);
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 22px;
+    opacity: 1;
+    text-align: left;
+    text-decoration: none;
+  }
+  .card-description {
+    padding: 2px 0;
+    width: 100%;
+    color: rgba(245, 245, 245, 0.6);
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 16px;
+    opacity: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card-date {
+    width: 100%;
+    color: rgb(245, 245, 245);
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 20px;
+    opacity: 1;
+    text-align: left;
+  }
+  
+  .card-price {
+    color: rgb(245, 245, 245);
+    font-family: Roboto;
+    font-weight: Regular;
+  /*   font-size: 20px; */
+    opacity: 1;
+    text-align: right;
+  }
+  
+  .card-discount {
+   
+    color: rgb(128, 128, 128);
+    font-family: Roboto;
+    font-weight: Regular;
+    /* font-size: 20px; */
+    opacity: 1;
+    text-align: right;
+    text-decoration: line-through;
+    margin: 0 10px;
+  }
+  .discount-number {
+    display: flex;
+ 
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .discount-percentage {
+    background-color: rgb(0, 125, 252);
+    padding: 0px 8px;
+    border-radius: 7px;
+  
+  }
+  .discount-prices {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-discount-container {
+    display: flex;
+    flex-direction: row;
+  }

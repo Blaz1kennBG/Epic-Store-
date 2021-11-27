@@ -1,0 +1,85 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #1f1f1f;
+    width: 100%
+    
+}
+.top-part {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: #313131;
+    flex-wrap: wrap;
+}
+.top-part-image-container {
+  width: 100%;
+  display: flex;
+justify-content: center;
+}
+.games-count {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  width: 100%;
+  color: rgb(245,245,245);
+  font-size: 25px;
+  font-family: Roboto;
+ 
+}
+.game-library {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 50px;
+}
+.smallcard {
+   
+    display: flex;
+    flex-direction: column;
+    width: 139px;
+    height: auto;
+   
+  }
+  
+  .smallcard-image {
+    width: 139px;
+    height: 188px;
+    background-color: rgb(83, 83, 83);
+    top: 5px;
+    left: 0px;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+  .top-part svg {
+    width: 100px;
+    height: 100px;
+    color: rgb(37, 133, 241);
+
+  }
+  
+  .games-header {
+    font-size: 25px;
+    color: rgb(245,245,245);
+    font-family: Roboto;
+    font-weight: Regular;
+    text-align: left;
+    width: 100%;
+  }
+  .smallcard, .games-header {
+    margin: 6px 56px;
+  }
+  .smallcard-image img {
+      width: 100%;
+      height: 100%;
+  }
+  .smallcard-text {
+    margin: 15px 5px;
+    color: rgb(245, 245, 245);
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 20px;
+    opacity: 1;
+    text-align: left;
+  }
+  

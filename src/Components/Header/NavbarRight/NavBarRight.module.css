@@ -1,0 +1,51 @@
+.header-right-list {
+  margin: 0;
+  display: flex;
+}
+
+.header-right-list .singin-item-list-item {
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
+    list-style: none;
+    background-color: rgb(0, 125, 252);
+    transition: background-color 0.5s ease;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .header-right-list .singin-item a {
+
+    color: #ccc;
+    font-size: 13px;
+    font-family: OpenSans, sans-serif, arial;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    text-align: center;
+
+  }
+  .singin-item-list-item:hover {
+    background-color: rgb(40, 147, 255);
+  }
+  .register-list-item {
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+  
+  .register-item a, .register-item span{
+    color: #ccc;
+    font-size: 13px;
+    font-family: OpenSans, sans-serif, arial;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .register-list-item:hover{
+    background-color: rgb(66, 66, 66);
+  }

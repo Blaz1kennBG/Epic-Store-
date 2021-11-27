@@ -1,0 +1,6 @@
+.card-list {
+    display: flex;
+   /*  flex-wrap: wrap; */
+    margin: 15px 91px;
+    justify-content: space-between;
+  }

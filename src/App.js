@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+
 import './App.css';
+import CardContainer from './Components/Card-list/Card-container';
+import Navbar from './Components/Header/NavBar';
+import TestComponent from './Components/Test/test';
+import {
+  BrowserRouter as Router,
+  Routes as Switch,
+  Route,
+
+} from "react-router-dom";
+import Details from './Components/Details/details';
+import Register from './Components/Forms/Register/Register';
+import {RecoilRoot} from 'recoil';
+import Login from './Components/Forms/Login/Login';
+import Profile from './Components/Profile/profile';
+
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+      <Router>
+        <Navbar />
+        <div className="container">
+
+          <Switch>
+            <Route exact path="/" element={<CardContainer />} />
+            <Route path="/test" element={<TestComponent />} />
+            <Route path="/details/:id" element={<Details />} />
+            <Route path="/register" element={<Register />} />\
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+          </Switch>
+
+        </div>
+      </Router>
+    </RecoilRoot>
   );
 }
 
