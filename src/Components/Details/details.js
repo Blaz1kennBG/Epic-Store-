@@ -40,7 +40,7 @@ const Details = () => {
 
     return (
         <>
-        <ToastContainer />
+        
             {game &&
                 <div className={style["details-container"]}>
 

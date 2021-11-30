@@ -9,7 +9,12 @@ const Navbar = () => {
         
         <div className={style.header}>
             <NavBarLeft />
-            <ToastContainer />
+            <ToastContainer     
+            draggable={true}
+            autoClose={2000}
+            theme={'dark'}
+            
+            />
             <NavBarRight notify={notify}/>
         </div>
     );
