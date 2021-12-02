@@ -21,7 +21,6 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
 
                 {game.isDiscounted &&
                     <>
-
                         <span className={style["discount-percentage"]}>-{game.discountedPrice}%</span>
                         <span className={style["full-price"]}>{game.price}BGN</span>
                         <span className={style["discounted-price"]}
@@ -60,23 +59,6 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
         {/*     If game is released and has a price */}
             {game.price > 0 &&
                 <>
-           {/*          { isOwned &&
-                        <button
-                            disabled={true}
-                            style={{ background: "#2A2A2A"}}
-                            className={style["buy-btn"]}>You already own this!
-                        </button>
-                    }
-                    {
-                        !isOwned && 
-                        <button
-                        disabled={false}
-                       
-                        onClick={() => gameActionHandler('buy')}
-                        className={style["buy-btn"]}>Buy Now
-                        </button>
-                    } */}
-                    
                            <button
                            disabled={isOwned ? true : false}
                            style={{ background: isOwned ? "#2A2A2A" : "" }}
