@@ -7,8 +7,6 @@ import {
   BrowserRouter as Router,
   Routes as Switch,
   Route,
-  Navigate,
-  useNavigate
 
 } from "react-router-dom";
 import Details from './Components/Details/details';

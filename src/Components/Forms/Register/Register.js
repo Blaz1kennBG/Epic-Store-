@@ -40,6 +40,7 @@ const Register = ({ modal, registerModalHandler, notify }) => {
                 const tempUser = new Backendless.User()
                 tempUser.objectId = u.objectId
                 tempUser.gamesBought = []
+                tempUser.wishlist = []
                 console.log(tempUser, u)
 
                 Backendless.UserService.update(tempUser)

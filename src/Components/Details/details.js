@@ -17,16 +17,23 @@ const Details = () => {
     const [currentUser, setCurrentUser] = useRecoilState(userState)
     const notify = () => toast("Game has been bought.!")
     
-    const gameActionHandler = () => {
+    const gameActionHandler = (action) => {
       
         const updatedUser = new Backendless.User()
         updatedUser.objectId = currentUser.objectId
-        updatedUser.gamesBought = [...currentUser.gamesBought]
-        updatedUser.gamesBought.push(game)
+        if (action === 'buy') {
+            updatedUser.gamesBought = [...currentUser.gamesBought]
+            updatedUser.gamesBought.push(game)
+        }
+      if (action === 'wishlist') {
+        updatedUser.wishlist = [...currentUser.wishlist]
+        updatedUser.wishlist.push(game)
+      }
         Backendless.UserService.update(updatedUser)
             .then(responseUpdate => {
             setCurrentUser(responseUpdate)
             notify()
+            console.log(action)
         })
             .catch(e => console.log(e))
     }

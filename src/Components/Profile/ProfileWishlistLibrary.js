@@ -4,25 +4,27 @@ import style from './profile.module.css'
 import {userState} from '../../store/globalState'
 import Backendless from 'backendless';
 import { toast } from 'react-toastify';
-const ProfileGameLibrary = ({ games }) => {
-    const [currentUser, setCurrentUser] = useRecoilState(userState)
+
+const ProfileWishlistLibrary = ({games}) => {
+
+  const [currentUser, setCurrentUser] = useRecoilState(userState)
     const notify = (text) => toast(text)
     const deleteGameHandler = (selectedGame) => {
         const updatedUser = new Backendless.User()
         updatedUser.objectId = currentUser.objectId
-        updatedUser.gamesBought = [...currentUser.gamesBought].filter(g => g.objectId !== selectedGame.objectId)
+        updatedUser.wishlist = [...currentUser.wishlist].filter(g => g.objectId !== selectedGame.objectId)
         Backendless.UserService.update(updatedUser)
         .then(responseUpdateUser => {setCurrentUser(responseUpdateUser)
-        notify("Game has been removed from your library.")
+        notify("Game has been removed from your wishlist.")
         })
     }
     return (
     
         <div className={style["game-library"]}>
  
-            <div className={style["games-header"]}>Game in library: {games.length}</div>
+            <div className={style["games-header"]}>Wishlist: {games.length}</div>
             {
-                games.length === 0 && <h1 style={{ color: "rgb(245,245,245)", margin: "6px 56px" }}>No games in the library.</h1>
+                games.length === 0 && <h1 style={{ color: "rgb(245,245,245)", margin: "6px 56px" }}>No games in the wishlist.</h1>
             }
             {games.length > 0 &&
 
@@ -48,6 +50,7 @@ const ProfileGameLibrary = ({ games }) => {
 
         </div>
     );
-}
 
-export default ProfileGameLibrary;
+}
+ 
+export default ProfileWishlistLibrary;
