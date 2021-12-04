@@ -30,6 +30,7 @@
     font-family: OpenSans, sans-serif, arial;
     letter-spacing: 1.1px;
     text-transform: uppercase;
+    padding: 25px 0;
   }
   
   .header-right-list {

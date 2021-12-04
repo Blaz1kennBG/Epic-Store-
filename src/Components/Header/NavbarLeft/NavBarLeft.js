@@ -16,14 +16,9 @@ const NavBarLeft = () => {
             
         </li>
         <li>
-            <a  className={style['link-item']}>News</a>
+            <Link  className={style['link-item']} to="/news">News</Link>
         </li>
-        <li>
-            <a className={style['link-item']}>FAQ</a>
-        </li>
-        <li>
-            <a className={style['link-item']}>Help</a>
-        </li>
+   
        
     </ul>
     );

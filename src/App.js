@@ -15,7 +15,8 @@ import {RecoilRoot, useRecoilValue} from 'recoil';
 import Login from './Components/Forms/Login/Login';
 import Profile from './Components/Profile/profile';
 import { userState } from './store/globalState';
-
+import News from './Components/News/News'
+import UploadArticle from './Components/Forms/UploadArticle/UploadArticle';
 function GuardedRoute({children}) {
   const user = useRecoilValue(userState)
 
@@ -36,12 +37,14 @@ function App() {
             <Route path="/details/:id" element={<Details />} />
             <Route path="/register" element={<Register />} />\
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={
+            <Route path="/news" element={<News />}/>
+            <Route path="/profile" 
+            element={
               <GuardedRoute>
                 <Profile />
               </GuardedRoute>
-
-            } />
+               } />
+               <Route path="/uploadArticle" element={<UploadArticle />} />
           </Switch>
 
         </div>

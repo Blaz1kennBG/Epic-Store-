@@ -22,7 +22,7 @@
     letter-spacing: 1.1px;
     text-transform: uppercase;
     text-align: center;
-
+    padding: 27px 0;
   }
   .singin-item-list-item:hover {
     background-color: rgb(40, 147, 255);
@@ -44,6 +44,7 @@
     letter-spacing: 1.1px;
     text-transform: uppercase;
     text-align: center;
+   
   }
 
   .register-list-item:hover{

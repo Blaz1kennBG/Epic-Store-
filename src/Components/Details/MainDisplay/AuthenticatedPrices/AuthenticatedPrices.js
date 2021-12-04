@@ -5,6 +5,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
     const [isOwned, setOwned] = useState(false)
     const [isWishlisted, setWishlisted] = useState(false)
     useEffect(() => {
+        
         currentUser.gamesBought.some(g => {
             if (g.objectId === game.objectId) { 
                 return setOwned(true) }
