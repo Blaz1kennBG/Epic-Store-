@@ -1,13 +1,21 @@
 import Backendless from 'backendless';
 import { useEffect, useState } from 'react';
+import { getRandomItemFromArray } from '../../utils/usefulFunctions';
 import Article from './Article/Article';
+import BigArticle from './BigArticle/BigArticle';
+import BigDummyArticle from './BigDummyArticle/BigDummyArticle';
 import DummyArticle from './DummyArticles/DummyArticle';
 import style from './News.module.css'
 const News = () => {
     const [articles, setArticles] = useState(undefined)
+    const [bigArticles, setBigArticles] = useState(undefined)
     useEffect( () => {
         Backendless.Data.of('Articles').find().then(response => {
+           /*  const _bigArticles = []
+            const firstRandomArticle = response.splice(0, Math.floor(Math.random() * response.length+1))
+            const secondArticle = response.splice(0, Math.floor(Math.random() * response.length+1)) */
             setArticles(response)
+            setBigArticles(getRandomItemFromArray(response))
         
         })
     }, [])
@@ -15,29 +23,14 @@ const News = () => {
         <div className={style["news-container"]}>
             <div className={style["top-part"]}>
                 <span className={style["news-title"]}>News</span>
-                <div className={style["top-container"]}>
-
-                    <div className={style["top-img"]}>
-                        <img />
-                    </div>
-                    <span className={style["top-time"]}>7H ago</span>
-                    <span className={style["top-title"]}>Hands on with Solar Ash, out now on Epic Games Store</span>
-                    <span>Read more</span>
-                </div>
-
-                <div className={style["top-container"]}>
-                    <div className={style["top-img"]}>
-                        <img />
-                    </div>
-                    <span className={style["top-time"]}>7H ago</span>
-                    <span className={style["top-title"]}>Hands on with Solar Ash, out now on Epic Games Store</span>
-                    <span>Read more</span>
-                </div>
+               {!bigArticles && <BigDummyArticle />}
+                {bigArticles && (bigArticles.map(ba => <BigArticle article={ba} key={ba.objectId}/>))}
+               
 
             </div>
 
             <div className={style["article-list"]}>
-            { articles && (articles.map(a => <Article article={a} key={Date.now()}/>))
+            { articles && (articles.map(a => <Article article={a} key={a.objectId}/>))
 
             }
             { !articles && <DummyArticle />  }

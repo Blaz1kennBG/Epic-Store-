@@ -21,13 +21,13 @@ const NavBarRight = ({notify}) => {
     const logoutHandler = () => {
         Backendless.UserService.logout().then(u => {
             setCurrentUser(undefined)
-            console.log('User logged out!')
+            
             navigate("/")
             notify("Logged out!")
         })
             .catch(e => {
                 navigate("/")    
-                console.log(e)
+                
             })
     }
     useEffect( () => {
@@ -36,7 +36,7 @@ const NavBarRight = ({notify}) => {
             if (u !== null) {
                 
             setCurrentUser(u)
-            console.log(u)
+        
             }
         })
         }
