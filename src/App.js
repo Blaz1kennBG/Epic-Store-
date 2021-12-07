@@ -17,6 +17,7 @@ import Profile from './Components/Profile/profile';
 import { userState } from './store/globalState';
 import News from './Components/News/News'
 import UploadArticle from './Components/Forms/UploadArticle/UploadArticle';
+import {Cloudinary} from '@cloudinary/url-gen'
 function GuardedRoute({children}) {
   const user = useRecoilValue(userState)
 
@@ -24,6 +25,8 @@ function GuardedRoute({children}) {
 }
 
 function App() {
+
+
 
   return (
     <RecoilRoot>

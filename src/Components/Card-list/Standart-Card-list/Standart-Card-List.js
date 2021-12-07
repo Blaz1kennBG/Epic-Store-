@@ -13,6 +13,7 @@ const StandartCardList = () => {
     useEffect( () => {
         Backendless.Data.of('Games').find().then(gamesList => {
             const temp = []
+            gamesList.sort((a,b) => b.created - a.created)
             for (let game of gamesList) {
                 game.genres = game.genres.split(', ')
                 temp.push(<Card game={game} key={game.objectId}/>)

@@ -1,6 +1,7 @@
 import Backendless from "backendless";
 import {useState } from "react";
 import { toast } from "react-toastify";
+import { uploadImage } from "../../../utils/cloudinary";
 import style from "./UploadArticle.module.css"
 
 const UploadArticle = () => {
@@ -14,7 +15,7 @@ const UploadArticle = () => {
         const blob = file.slice(0, file.size, 'image/png'); 
         const newFile = new File([blob], Date.now()+".png", {type: file.type})
 
-          Backendless.Files.upload(newFile, "articlethumbnails")
+        uploadImage(newFile)
         .then(fileUrlResponse => {
             console.log(fileUrlResponse.fileURL)
               Backendless.Data.of("Articles").save({ title: title, description: description, thumbnail: fileUrlResponse.fileURL}) 
@@ -31,7 +32,8 @@ const UploadArticle = () => {
         .catch(e => 
             {
             notify(e)
-            console.log("ERROR >>> ", e)})  
+            console.log("ERROR >>> ", e)})   
+           
     }
     return ( 
             <form className={style["box"]} onSubmit={submitHandler}>

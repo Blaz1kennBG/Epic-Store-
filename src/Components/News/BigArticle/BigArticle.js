@@ -1,5 +1,8 @@
+
+import LazyLoad from 'react-lazyload'
 import style from '../News.module.css'
 const BigArticle = ({ article }) => {
+ 
     const d = new Date(article.created)
     let month = '' + (d.getMonth() + 1)
     let day = '' + d.getDate()
@@ -10,11 +13,23 @@ const BigArticle = ({ article }) => {
         day = '0' + day;
     const articleCreationDate = [year, month, day].join('/');
 
+
+
+
+
+
     return (
         <div className={style["top-container"]}>
 
             <div className={style["top-img"]}>
-                <img src={article.thumbnail} />
+
+           <LazyLoad height={300}>
+               <img src={article.thumbnail} />
+           </LazyLoad>
+         
+                
+               
+                
             </div>
             <span className={style["top-time"]}>{articleCreationDate}</span>
             <span className={style["top-title"]}>{article.title}</span>
