@@ -1,6 +1,6 @@
-
 import LazyLoad from 'react-lazyload'
-import style from '../News.module.css'
+import { Link } from 'react-router-dom'
+import style from '../../News.module.css'
 const BigArticle = ({ article }) => {
  
     const d = new Date(article.created)
@@ -21,19 +21,14 @@ const BigArticle = ({ article }) => {
     return (
         <div className={style["top-container"]}>
 
-            <div className={style["top-img"]}>
-
-           <LazyLoad height={300}>
-               <img src={article.thumbnail} />
-           </LazyLoad>
-         
-                
-               
-                
+            <LazyLoad>
+            <div className={style["top-img"]}> 
+               <img src={article.thumbnail} />             
             </div>
+            </LazyLoad>
             <span className={style["top-time"]}>{articleCreationDate}</span>
             <span className={style["top-title"]}>{article.title}</span>
-            <span>Read more</span>
+            <Link to={`/news/${article.objectId}`}>Read more</Link>
         </div>
     );
 }

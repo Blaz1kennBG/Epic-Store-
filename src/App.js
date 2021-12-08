@@ -11,14 +11,16 @@ import {
 } from "react-router-dom";
 import Details from './Components/Details/details';
 import Register from './Components/Forms/Register/Register';
-import {RecoilRoot, useRecoilValue} from 'recoil';
+import { RecoilRoot, useRecoilValue } from 'recoil';
 import Login from './Components/Forms/Login/Login';
 import Profile from './Components/Profile/profile';
 import { userState } from './store/globalState';
 import News from './Components/News/News'
 import UploadArticle from './Components/Forms/UploadArticle/UploadArticle';
-import {Cloudinary} from '@cloudinary/url-gen'
-function GuardedRoute({children}) {
+import { Cloudinary } from '@cloudinary/url-gen'
+import ArticleDetails from './Components/News/ArticleDetails/ArticleDetails';
+import ArticleTemplate from './Components/Forms/Article-Template/ArticleTemplate';
+function GuardedRoute({ children }) {
   const user = useRecoilValue(userState)
 
   return user ? children : <Login show={true} />
@@ -35,19 +37,18 @@ function App() {
         <div className="container">
 
           <Switch>
-            <Route exact path="/" element={<CardContainer />}  />
+            <Route exact path="/" element={<CardContainer />} />
             <Route path="/test" element={<TestComponent />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/register" element={<Register />} />\
             <Route path="/login" element={<Login />} />
-            <Route path="/news" element={<News />}/>
-            <Route path="/profile" 
-            element={
-              <GuardedRoute>
-                <Profile />
-              </GuardedRoute>
-               } />
-               <Route path="/uploadArticle" element={<UploadArticle />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<ArticleDetails />} />
+            <Route path="/atu" element={<ArticleTemplate />} />
+            <Route path="/profile"
+              element={<GuardedRoute> <Profile />  </GuardedRoute>} />
+            <Route path="/uploadArticle" element={<UploadArticle />} />
+
           </Switch>
 
         </div>

@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { getRandomItemFromArray } from '../../utils/usefulFunctions';
 import Article from './Article/Article';
+import DummyArticle from './Article/DummyArticles/DummyArticle';
+import BigDummyArticle from './BigArticleContainer/BigArticle/BigDummyArticle/BigDummyArticle';
 import BigArticleContainer from './BigArticleContainer/BigArticleContainer';
-import BigDummyArticle from './BigDummyArticle/BigDummyArticle';
-import DummyArticle from './DummyArticles/DummyArticle';
+
+
 import style from './News.module.css'
 const News = () => {
     
@@ -14,8 +16,10 @@ const News = () => {
     useEffect( () => {
         Backendless.Data.of('Articles').find().then(response => {
            
+            if (response.length > 2) { 
             setArticles(response)
             setBigArticles(getRandomItemFromArray(response))
+            }
             
         })
    

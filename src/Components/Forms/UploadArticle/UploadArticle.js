@@ -13,12 +13,13 @@ const UploadArticle = () => {
         
         ev.preventDefault()
         const blob = file.slice(0, file.size, 'image/png'); 
+   
         const newFile = new File([blob], Date.now()+".png", {type: file.type})
 
         uploadImage(newFile)
         .then(fileUrlResponse => {
-            console.log(fileUrlResponse.fileURL)
-              Backendless.Data.of("Articles").save({ title: title, description: description, thumbnail: fileUrlResponse.fileURL}) 
+            console.log(fileUrlResponse)
+              Backendless.Data.of("Articles").save({ title: title, description: description, thumbnail: fileUrlResponse}) 
             .then(response => {
                 console.log(response)
             })

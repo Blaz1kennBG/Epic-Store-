@@ -54,10 +54,6 @@
     margin-top: 10px;
 }
 
-.article-list {
-
-}
-
 .article {
     display: flex;
     padding: 20px 0;
@@ -83,7 +79,7 @@
 
 .article-time {
     color: rgba(255, 255, 255, 0.5);
-    margin: 0 15px;
+    margin: -5px 15px;
     width: 100%;
 }
 
@@ -94,7 +90,7 @@
 }
 
 .article-readmore {
-    margin: auto 0 0 15px;
+    margin: auto 0 -3px 15px;
     width: 100%;
     color: white;
 

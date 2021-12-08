@@ -1,24 +1,30 @@
-import { useEffect, useState } from 'react';
+
+import { Link } from 'react-router-dom'
 import style from '../News.module.css'
 
 const Article = ({article}) => {
-    const [image, setImage] = useState(undefined)
-    useEffect(() => {
-        const _image = new Image(200, 90)
-        _image.src = article.thumbnail
-        setImage(_image.src)
-    })
+
+    const d = new Date(article.created)
+    let month = '' + (d.getMonth() + 1)
+    let day = '' + d.getDate()
+    let year = d.getFullYear();
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+    const articleCreationDate = [year, month, day].join('/');
+
     return (  
         <div className={style["article"]}>
 
         <div className={style["image-container"]}>
-            <img src={image}/>
+            <img src={article.thumbnail}/>
         </div>
 
         <div className={style["text-container"]}>
-            <span className={style["article-time"]}>{article.createdAt}</span>
+            <span className={style["article-time"]}>{articleCreationDate}</span>
             <span className={style["article-title"]}>{article.title}</span>
-            <span className={style["article-readmore"]}>Read more</span>
+            <Link className={style["article-readmore"]} to={`/news/${article.objectId}`}>Read more</Link>
         </div>
 
     </div>

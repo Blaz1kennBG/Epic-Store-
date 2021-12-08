@@ -70,7 +70,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
                     <button className={style["wishlist-btn"]} 
                     onClick={() => gameActionHandler('wishlist')}
                     disabled={isWishlisted ? true : false}
-                    >{isWishlisted ? "Game is wishlisted" : "Add to library"}</button>
+                    >{isWishlisted ? "Game is wishlisted" : "Add to wishlist"}</button>
                 </>
             }
            {/*  If game is not released yet */}
