@@ -10,8 +10,7 @@ const ArticleTemplate = () => {
     const [titleEdit, setTitleEdit] = useState(false)
     const [title, setTitle] = useState("Title")
 
-    const [dateEdit, setDateEdit] = useState(false)
-    const [date, setDate] = useState('........')
+
 
     const [developerEdit, setDeveloperEdit] = useState(false)
     const [developer, setDeveloper] = useState("XXX Company")
@@ -28,7 +27,7 @@ const ArticleTemplate = () => {
     const editHandler = (value, type) => {
         console.log(value)
         if (type === "title") { setTitle(value); setTitleEdit(!titleEdit) }
-        if (type === "date") { setDate(value); setDateEdit(!dateEdit) }
+      
         if (type === "developer") { setDeveloper(value); setDeveloperEdit(!developerEdit)}
         if (type === "paragraph1") { setParagraph1(value); setParapraph1Edit(!pararaph1Edit)}
         if (type === "paragraph2") { setParagraph2(value); setParapraph2Edit(!pararaph2Edit)}
@@ -63,7 +62,7 @@ const ArticleTemplate = () => {
 
                 {titleEdit ? <InputEdit editHandler={editHandler} value={title} type={"title"} /> : <h1 onDoubleClick={() => setTitleEdit(!titleEdit)}>{title}</h1>}
 
-                {dateEdit ? <InputEdit editHandler={editHandler} value={date} type={"date"} /> : <span onDoubleClick={() => setDateEdit(!dateEdit)} className={style["main-text"]}>{date}</span>}
+            
                 {developerEdit ? <InputEdit editHandler={editHandler} value={developer} type={"developer"}/> : <span onDoubleClick={() => setDeveloperEdit(!developerEdit)} className={style["main-text"]}>By {developer}</span>}
 
                 <div className={style["descriptions"]}>

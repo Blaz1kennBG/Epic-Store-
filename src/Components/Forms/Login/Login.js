@@ -5,80 +5,85 @@ import { Link } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import { userState } from "../../../store/globalState"
 import style from "./Login.module.css"
+import {Icon} from '@iconify/react'
+import { toast } from "react-toastify"
+import { loginUser } from "../../../utils/userService"
 
 
 
-
-const Login = ({ modal, loginModalHandler, notify, show }) => {
+const Login = () => {
     const [currentUser, setCurrentUser] = useRecoilState(userState)
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
     let navigate = useNavigate()
-    const [showMe, setShow] = useState(show)
     useEffect(() => {
 
         return () => {
-
         }
     }, [])
-    const showHideModal = (e) => {
-        e.preventDefault()
-        if (e.target.tagName == "DIV") {
-            loginModalHandler()
 
-        }
-    }
     const submitHandler = (e) => {
         e.preventDefault()
-        Backendless.UserService.login(username, password, true)
-            .then(u => {
-
-                setCurrentUser(u)
-                notify("Logged in!")
-                loginModalHandler()
-                navigate("/")
-
-            }).catch(e => notify(e.message))
-    }
-    return (
-        <>
-
-            {modal ? (
-
-                <div className={style['modal']} onClick={showHideModal}>
-
-                    <form className={style["box"]}>
-                        <h1>Login</h1>
-                        <input type="text" name="username" placeholder="Username" onChange={(ev) => setUsername(ev.target.value)} />
-                        <input type="password" name="password" placeholder="Password" onChange={(ev) => setPassword(ev.target.value)} />
-                        <input type="submit" name="login" value="Login" onClick={submitHandler} />
-                        <h2>Dont have an account? <Link to="/register" state={{ show: true }} onClick={loginModalHandler}>Sing up!</Link></h2>
-                    </form>
-
-                </div>
-            )
-                : showMe ?
-                    <div className={style['modal']} onClick={(e) => {
-                        if (e.target.tagName == "DIV") { 
-                            e.target.display = "none"
-                            navigate('/') }
-                    }}>
-
-                        <form className={style["box"]}>
-                            <h1>Login</h1>
-                            <input type="text" name="username" placeholder="Username" onChange={(ev) => setUsername(ev.target.value)} />
-                            <input type="password" name="password" placeholder="Password" onChange={(ev) => setPassword(ev.target.value)} />
-                            <input type="submit" name="login" value="Login" onClick={submitHandler} />
-                            <h2>Dont have an account? <Link to="/register" state={{ show: true }} onClick={(e) => setShow(false)}>Sing up!</Link></h2>
-                        </form>
-
-                    </div>
-                    : ""
+  
+            toast.promise(loginUser(username,password), {
+                pending: {
+                    render() { 
+                        return "Loading..."
+                    },
+                    icon: false
+                }, 
+                success: {
+                    render({data}) {
+                        setCurrentUser(data)
+                        navigate("/")
+                        return `Hello, ${username}`
+                    },
+                    icon: "🟢"
+                },
+                error: {
+                    render({data}) {
+                        console.log(data)
+                        return `Oops, ${data}`
+                    }
+                }
+                
             }
+        
+        )
+    }
+    
 
-        </>
 
-    );
+return (
+    <>
+        <div className={style["form-background"]}>
+            <div className={style["form-container"]}>
+                <div className={style["icon-and-label"]}>
+                <Icon icon="simple-icons:epicgames" className={style['iconify']}/>
+                    <label>Sign in with a epic games account</label>
+                </div>
+                <form onSubmit={submitHandler}>
+                    <div className={style["input-container"]}>
+                        <input className={style["inputChild"]} type="text" onChange = {(ev) => setUsername(ev.target.value)} value={username}/>
+                            <label className={style["inputLabel"]}>Username</label>
+                    </div>
+
+                    <div className={style["input-container"]}>
+                <input className={style["inputChild"]} type="password" onChange = {(ev) => setPassword(ev.target.value)} value={password}/>
+                <label className={style["inputLabel"]}>Password</label>
+               </div>
+               <button>Login now</button>
+               <div className={style["text-container"]}>
+                <p>Don't have an account? <Link to="/register">Sign up now</Link></p>
+               </div>
+            </form>
+            </div>
+        </div>
+
+
+    </>
+
+);
 }
 
 export default Login;

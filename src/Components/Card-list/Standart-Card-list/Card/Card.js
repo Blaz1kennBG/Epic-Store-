@@ -6,8 +6,8 @@ const Card = ({ game }) => {
     return (
         <div className={style['card']}>
             <div className={style['card-image']}>
-                {/*   <img src={"./GamePortraits/ValorantPortrait.png"} /> */}
-                <img src={game.image} />
+
+                <img src={game.thumbnail} />
             </div>
             <div className={style['card-content']}>
                 <Link className={style['card-title']} style={{ color: "rgb(245,245,245)" }}

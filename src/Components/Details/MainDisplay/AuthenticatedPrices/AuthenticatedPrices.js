@@ -32,7 +32,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
                 {game.isDiscounted === false &&
                     <>
 
-                        ({game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
+                        {game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
                             : game.price === 0 ? <span className={style['discounted-price']}>Free</span>
                                 : 
                                 <span className={style['discounted-price']}
@@ -41,7 +41,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
                                 >Available: {game.availableDate}
                                 </span>
 
-                        })
+                        }
                     </>
                 }
 

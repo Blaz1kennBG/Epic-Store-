@@ -40,7 +40,7 @@ const Details = () => {
 
     useEffect(() => {
         Backendless.Data.of('Games').findById(params.id).then(g => {
-            g.genres = g.genres.split(', ')
+            
             setGame(g)
         })
     }, [])

@@ -8,26 +8,17 @@ import Login from '../../Forms/Login/Login';
 import Backendless from 'backendless';
 
 const NavBarRight = ({notify}) => {
-    const [registerModal, showRegisterModal] = useState(false)
-    const [loginModal, showLoginModal] = useState(false)
     const [currentUser, setCurrentUser] = useRecoilState(userState)
     let navigate = useNavigate()
-    const registerModalHandler = (e) => {
-        showRegisterModal(!registerModal)
-    }
-    const loginModalHandler = (e) => {
-        showLoginModal(!loginModal)
-    }
+
     const logoutHandler = () => {
         Backendless.UserService.logout().then(u => {
             setCurrentUser(undefined)
-            
             navigate("/")
             notify("Logged out!")
         })
             .catch(e => {
-                navigate("/")    
-                
+                navigate("/")                   
             })
     }
     useEffect( () => {
@@ -49,15 +40,14 @@ const NavBarRight = ({notify}) => {
                 
                 { !currentUser &&
                 <>
-                <li className={style['register-list-item']} onClick={registerModalHandler}>
+                <li className={style['register-list-item']} >
                 <div className={style['register-item']} >
-                    <span >Register</span>
+                    <Link to="/register">Register</Link>
                 </div>
             </li>
-                <li className={style['singin-item-list-item']} onClick={loginModalHandler}>
+                <li className={style['singin-item-list-item']} >
                     <div className={style['singin-item']}>
                         <Link to="/login">Sign in</Link>
-                        
                     </div>
                     </li>
                     </>
@@ -78,8 +68,8 @@ const NavBarRight = ({notify}) => {
                 }
                
             </ul>
-            {registerModal && <Register modal={registerModal} registerModalHandler={registerModalHandler} notify={notify}/>}
-            {loginModal && <Login modal={loginModal} loginModalHandler={loginModalHandler} notify={notify}/>}
+          
+            
         </>
 
     );

@@ -15,7 +15,7 @@ const StandartCardList = () => {
             const temp = []
             gamesList.sort((a,b) => b.created - a.created)
             for (let game of gamesList) {
-                game.genres = game.genres.split(', ')
+             
                 temp.push(<Card game={game} key={game.objectId}/>)
             }
             setGames(temp)

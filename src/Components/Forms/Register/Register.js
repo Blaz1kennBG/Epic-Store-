@@ -6,14 +6,19 @@ import { useEffect, useState } from "react"
 import Backendless from "backendless"
 import { userState } from "../../../store/globalState"
 import { useLocation, useNavigate } from "react-router"
+import { Icon } from "@iconify/react"
+import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
+import { registerUser } from "../../../utils/userService"
 
 
-const Register = ({ modal, registerModalHandler, notify }) => {
+const Register = () => {
     const [currentUser, setCurrentUser] = useRecoilState(userState)
     let navigate = useNavigate()
     let location = useLocation()
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
+
     console.log(location)
     useEffect(() => {
 
@@ -21,80 +26,67 @@ const Register = ({ modal, registerModalHandler, notify }) => {
 
         }
     }, [])
-    const showHideModal = (e) => {
-        e.preventDefault()
-        if (e.target.tagName == "DIV") {
-            registerModalHandler()
 
-        }
-    }
     const submitHandler = (e) => {
         e.preventDefault()
 
         const user = new Backendless.User()
         user.username = username
         user.password = password
-        Backendless.UserService.register(user)
-            .then(u => {
-                console.log("Pre updated user >>> ", u)
-                const tempUser = new Backendless.User()
-                tempUser.objectId = u.objectId
-                tempUser.gamesBought = []
-                tempUser.wishlist = []
-                console.log(tempUser, u)
-
-                Backendless.UserService.update(tempUser)
-                    .then(updatedUserResponse => {
-                        console.log("Updated user >>> ", u)
-                        setCurrentUser(updatedUserResponse)
-                        notify("Register successful! You can now login.")
-                        registerModalHandler()
-                        navigate("/")
-
-                    })
-            })
-            .catch(e => {
-
-                notify(e.message)
-            })
-
+        
+        toast.promise(registerUser(user), {
+            pending: {
+                render() { 
+                    return "Loading..."
+                },
+                icon: false
+            }, 
+            success: {
+                render({data}) {
+                    setCurrentUser(data)
+                    navigate("/")
+                    return `You have been registered. You can log in now.`
+                },
+                icon: "🟢"
+            },
+            error: {
+                render({data}) {
+                    console.log(data)
+                    return `Oops, ${data}`
+                }
+            }
+        }
+        )
     }
     return (
         <>
+            <div className={style["form-background"]}>
+                <div className={style["form-container"]}>
+                    <div className={style["icon-and-label"]}>
+                        <Icon icon="simple-icons:epicgames" className={style['iconify']} />
+                        <label>Sign up now.</label>
+                    </div>
+                    <form onSubmit={submitHandler}>
+                        <div className={style["input-container"]}>
+                            <input className={style["inputChild"]} type="text" onChange={(ev) => setUsername(ev.target.value)} value={username} />
+                            <label className={style["inputLabel"]}>Username</label>
+                        </div>
 
-            {modal ?
-                <div className={style['modal']} onClick={showHideModal}>
-
-                    <form className={style["box"]}>
-
-                        <h1>Register</h1>
-                        <input type="text" name="username" placeholder="Username" onChange={(ev) => setUsername(ev.target.value)} />
-
-                        <input type="password" name="password" placeholder="Password" onChange={(ev) => setPassword(ev.target.value)} />
-                        <input type="submit" name="login" value="Register" onClick={submitHandler} />
+                        <div className={style["input-container"]}>
+                            <input className={style["inputChild"]} type="password" onChange={(ev) => setPassword(ev.target.value)} value={password} />
+                            <label className={style["inputLabel"]}>Password</label>
+                        </div>
+                        <button>Register now</button>
+                        <div className={style["text-container"]}>
+                            <p>Have an account already? <Link to="/login">Sign in now</Link></p>
+                        </div>
                     </form>
-
                 </div>
-              : location.state.show ? 
-                 <div className={style['modal']} onClick={(e) => {
-                    if (e.target.tagName == "DIV") { 
-                      
-                        navigate('/') } }}>
+            </div>
 
-                    <form className={style["box"]}>
-
-                        <h1>Register</h1>
-                        <input type="text" name="username" placeholder="Username" onChange={(ev) => setUsername(ev.target.value)} />
-
-                        <input type="password" name="password" placeholder="Password" onChange={(ev) => setPassword(ev.target.value)} />
-                        <input type="submit" name="login" value="Register" onClick={submitHandler} />
-                    </form>
-
-                </div>
-                : ""
-            }
 
         </>
+
     );
 }
 

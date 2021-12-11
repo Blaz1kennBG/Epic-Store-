@@ -5,7 +5,7 @@
 
 .header-right-list .singin-item-list-item {
     display: flex;
-    padding: 0 18px;
+
     align-items: center;
     list-style: none;
     background-color: rgb(0, 125, 252);
@@ -22,14 +22,13 @@
     letter-spacing: 1.1px;
     text-transform: uppercase;
     text-align: center;
-    padding: 27px 0;
+    padding: 27px 18px;
   }
   .singin-item-list-item:hover {
     background-color: rgb(40, 147, 255);
   }
   .register-list-item {
     display: flex;
-    padding: 0 18px;
     align-items: center;
     list-style: none;
     height: 100%;
@@ -44,6 +43,7 @@
     letter-spacing: 1.1px;
     text-transform: uppercase;
     text-align: center;
+    padding: 25px 18px;
    
   }
 

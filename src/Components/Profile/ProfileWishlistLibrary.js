@@ -32,7 +32,7 @@ const ProfileWishlistLibrary = ({games}) => {
                     return (
                         <div className={style["smallcard"]}>
                             <div className={style["smallcard-image"]}>
-                                <img src={game.image} />
+                                <img src={game.thumbnail} />
                             </div>
                             <div className={style["smallcard-bottom"]}>
                                 <div className={style["smallcard-text"]}>

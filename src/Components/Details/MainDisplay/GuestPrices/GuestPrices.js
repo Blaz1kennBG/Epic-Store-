@@ -18,14 +18,14 @@ const GuestPrices = ({game}) => {
             {game.isDiscounted === false &&
                 <>
 
-                    ({game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
+                    {game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
                         : game.price === 0 ? <span className={style['discounted-price']}>Free</span>
                             : <span className={style['discounted-price']}
                                 disabled={true}
                                 style={{ background: "#2A2A2A" }}
                             >Available: {game.availableDate}</span>
 
-                    })
+                    }
                 </>
             }
 
