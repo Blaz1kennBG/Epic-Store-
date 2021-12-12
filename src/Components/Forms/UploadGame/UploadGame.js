@@ -1,6 +1,7 @@
 import { thumbnail } from '@cloudinary/url-gen/actions/resize'
 import Backendless from 'backendless'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { uploadImage } from '../../../utils/cloudinary'
 import { uploadGame } from '../../../utils/gameService'
@@ -12,23 +13,41 @@ const UploadGame = () => {
     const [developer, setDeveloper] = useState('')
     const [publisher, setPublisher] = useState('')
     const [genres, setGenres] = useState([])
-    const [price, setPrice] = useState(0)
-    const [discount, setDiscount] = useState(0)
+    const [price, setPrice] = useState('')
+    const [discount, setDiscount] = useState('')
     const [images, setImages] = useState([])
     const [gameLogo, setGameLogo] = useState(undefined)
     const [description, setDescription] = useState('')
     const [thumbnail, setGameThumbnail] = useState(undefined)
-
+    const [isDiscounted, setIsDiscounted] = useState(false)
+    const navigate = useNavigate()
 
     const submitHandler = (ev) => {
         ev.preventDefault()
        
-        uploadGame(title,developer,description,publisher,genres,price,discount,images,gameLogo,thumbnail)
-        .then(res => {
-            toast("Game uploaded")
-            console.log(res)
+        toast.promise(uploadGame(title,developer,description,publisher,genres,price,discount,images,gameLogo,thumbnail, isDiscounted), {
+            pending: {
+                render() { 
+                    return "Uploading..."
+                },
+                icon: false
+            }, 
+            success: {
+                render({data}) {
+                  
+                    navigate("/")
+                    return `Game uploaded!`
+                },
+                icon: "🟢"
+            },
+            error: {
+                render({data}) {
+                    console.log(data)
+                    return `Oops, ${data}`
+                }
+            }
         })
-        .catch(e => toast(e))  
+        
      
       
         
@@ -38,7 +57,7 @@ const UploadGame = () => {
     }
 
     return (
-        <div className={style['modal']} >
+        <div className={style['form-container']} >
 
             <form className={style["box"]} onSubmit={submitHandler}>
 
@@ -46,8 +65,8 @@ const UploadGame = () => {
                 <input type="text" name="title" placeholder="title" onChange={(ev) => setTitle(ev.target.value)} value={title} required/>
 
                 <input type="text" name="developer" placeholder="developer" onChange={(ev) => setDeveloper(ev.target.value)} value={developer} required/>
-                <input type="text" name="description" placeholder="description" onChange={(ev) => setDescription(ev.target.value)} value={description} required/>
                 <input type="text" name="publisher" placeholder="publisher" onChange={(ev) => setPublisher(ev.target.value)} value={publisher} required/>
+                <input type="text" name="description" placeholder="description" onChange={(ev) => setDescription(ev.target.value)} value={description} required/>
                 <input type="text" name="genres" placeholder="genres"  onKeyDown={(ev) => {
                     if (ev.key === ",") {
                         const _genres = [...genres]
@@ -60,7 +79,9 @@ const UploadGame = () => {
                     defaultValue={genres} />
                 {genres.map(g => <div style={{ width: "100%" }} key={Math.random(0, 999)}>{g}</div>)}
                 <input type="number" name="price" placeholder="Price 0 is free, below 0 is not released" onChange={(ev) => setPrice(ev.target.value)} value={price} required/>
-                <input type="number" name="discount" placeholder="discount" onChange={(ev) => setDiscount(ev.target.value)} value={discount} required/>
+                <span>Game is Discounted?</span>
+                <input type="checkbox" onChange={(ev) => setIsDiscounted(ev.target.checked)} />
+                {isDiscounted && <input type="number" name="discount" placeholder="discount %" onChange={(ev) => setDiscount(ev.target.value)} value={discount} required/>}
                 <span>Screnshots of game "max 3"</span>
                 <input type="file" name="images" required onChange={(ev) => {
                     if (images.length < 3) {

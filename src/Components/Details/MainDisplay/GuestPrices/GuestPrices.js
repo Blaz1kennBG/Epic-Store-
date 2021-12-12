@@ -8,10 +8,10 @@ const GuestPrices = ({game}) => {
             {game.isDiscounted &&
                 <>
 
-                    <span className={style["discount-percentage"]}>-{game.discountedPrice}%</span>
+                    <span className={style["discount-percentage"]}>-{game.discount}%</span>
                     <span className={style["full-price"]}>{game.price}BGN</span>
                     <span className={style["discounted-price"]}
-                    >{(game.price - (game.price * (game.discountedPrice / 100))).toFixed(2)} BGN</span>
+                    >{(game.price - (game.price * (game.discount / 100))).toFixed(2)} BGN</span>
 
                 </>
             }

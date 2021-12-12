@@ -17,11 +17,11 @@ const Card = ({ game }) => {
                 {game.isDiscounted &&
                     <div className={style['card-discount-container']}>
                         <div className={style['discount-number']}>
-                            <span className={style["discount-percentage"]}>{game.discountedPrice}%</span>
+                            <span className={style["discount-percentage"]}>-{game.discount}%</span>
                         </div>
                         <div className={style["discount-prices"]}>
                             <span className={style["card-discount"]}>BGN {game.price} </span>
-                            <span className={style["card-price"]}>BGN {(game.price - (game.price * (game.discountedPrice / 100))).toFixed(2)}</span>
+                            <span className={style["card-price"]}>BGN {(game.price - (game.price * (game.discount / 100))).toFixed(2)}</span>
                         </div>
 
                     </div>
