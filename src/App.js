@@ -48,27 +48,27 @@ function App() {
             <Route path="/test" element={<TestComponent />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/register" element={
-            <UnGuardedRoute>
-            <Register />
-            </UnGuardedRoute>} />
+              <UnGuardedRoute>
+                <Register />
+              </UnGuardedRoute>} />
             <Route path="/login" element={
-            <UnGuardedRoute>
-              <Login />
-            </UnGuardedRoute>
+              <UnGuardedRoute>
+                <Login />
+              </UnGuardedRoute>
             } />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<ArticleDetails />} />
             <Route path="/atu" element={<ArticleTemplate />} />
             <Route path="/profile"
               element={<GuardedRoute>
-                 <Profile />  
-                 </GuardedRoute>} />
+                <Profile />
+              </GuardedRoute>} />
             <Route path="/uploadArticle" element={<UploadArticle />} />
-            <Route path="/uploadGame" element={<UploadGame />}/>
+            <Route path="/uploadGame" element={<UploadGame />} />
             <Route path="/cart" element={
               <GuardedRoute>
-            <ShoppingCart />
-            </GuardedRoute> } />
+                <ShoppingCart />
+              </GuardedRoute>} />
             <Route path="*" element={<CardContainer />} />
           </Switch>
 

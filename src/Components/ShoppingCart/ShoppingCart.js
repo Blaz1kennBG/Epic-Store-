@@ -1,15 +1,38 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import { shoppingCartState } from '../../store/globalState';
+import { shoppingCartState, userState } from '../../store/globalState';
+import { buyGamesInCart, emptyCart, loadCart, removeItemFromCart } from '../../utils/gameService';
+import { priceReducer } from '../../utils/reducers';
 import EmptyShoppingCart from './EmptyShoppingCart';
 import style from './ShoppingCart.module.css'
 import ShoppingCartItem from './ShoppingCartItem/ShoppingCartItem';
 
 const ShoppingCart = () => {
     const [cart, setCart] = useRecoilState(shoppingCartState)
-    useEffect(() => {
+    const [currentUser, setCurrentUser] = useRecoilState(userState)
+    const [totalPrice, setTotalPrice] = useState(0)
+    const removeHandler = (game) => {
+        removeItemFromCart(currentUser, game).then(res => setCart(res))
+    }
+    const buyHandler = () => {
+        buyGamesInCart(currentUser, cart)
+        .then(updatedUser => {
 
-    })
+            emptyCart(updatedUser)
+            .then(updatedCart => setCart(updatedCart))
+            
+            setCurrentUser(updatedUser)
+            toast("Games has been bought.")
+        })
+       
+    }
+    useEffect(() => {
+            const _totalPrice = cart.reduce(priceReducer, 0)
+            setTotalPrice(_totalPrice.toFixed(2))
+      
+
+    },[cart])
     return (
         <div className={style["shopping-cart-container"]}>
             <h1>My cart</h1>
@@ -17,7 +40,7 @@ const ShoppingCart = () => {
                 {cart.length > 0 &&
                     <>
                         <div className={style["cart-items"]}>
-                            {cart && cart.map(g => <ShoppingCartItem key={g.objectId} game={g} />)}
+                            {cart && cart.map(g => <ShoppingCartItem key={g.objectId} game={g} removeHandler={removeHandler}/>)}
                         </div>
 
 
@@ -25,7 +48,8 @@ const ShoppingCart = () => {
                             <span>Games and Apps Summary</span>
                             <div className={style["purchase-price"]}>
                                 <span>Price</span>
-                                <span>BGN {cart.length !== 0 && cart.reduce((initialPrice, game) => initialPrice.price + game.price)}</span>
+                                <span>BGN {totalPrice}</span>
+                              
                             </div>
                             <div className={style["purchase-price"]}>
                                 <span>Tax</span>
@@ -33,8 +57,9 @@ const ShoppingCart = () => {
                             </div>
                             <div className={style["purchase-price"]}>
                                 <span>Subtotal</span>
-                                <span>BGN {cart.length !== 0 && cart.reduce((initialPrice, game) => initialPrice.price + game.price)}</span>
+                                <span>BGN {totalPrice}</span>
                             </div>
+                            <button onClick={buyHandler} style={{width: "100%", backgroundColor: "rgb(0, 125, 252)", border: "none", borderRadius: "5px"}}>Checkout</button>
                         </div>
                     </>
                 }

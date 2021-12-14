@@ -15,7 +15,6 @@ export async function uploadGame(title,developer,description,publisher,genres,pr
         thumbnail: '',
         isDiscounted: isDiscounted
     }
-    console.log(genres)
       let blobbedImages = undefined
     if (images) {
          blobbedImages = images.map(img => {
@@ -45,6 +44,21 @@ export async function uploadGame(title,developer,description,publisher,genres,pr
     return response
 }
 
+export async function buyGamesInCart(user, cart) {
+    const updatedUser = new Backendless.User()
+    updatedUser.objectId = user.objectId
+    updatedUser.gamesBought = [...user.gamesBought]
+    for (let game of cart) {
+        updatedUser.gamesBought.push(game)
+    }
+  const response = await Backendless.UserService.update(updatedUser)
+  await emptyCart(user)
+  return response
+
+    
+}
+
+
 export async function addToCart(game, user) {
     await Backendless.Data.of("Users").addRelation(
         user, 
@@ -57,6 +71,26 @@ export async function addToCart(game, user) {
 export async function loadCart(user) {
     const loadRelationQueryBuilder = Backendless.LoadRelationsQueryBuilder.create()
     loadRelationQueryBuilder.setRelationName( "carts" )
-   return await Backendless.Data.of("Users").loadRelations(user.objectId, loadRelationQueryBuilder)
+   const cart = await Backendless.Data.of("Users").loadRelations(user.objectId, loadRelationQueryBuilder)
+   return cart
     
+}
+export async function removeItemFromCart(user,game) {
+   
+await Backendless.Data.of("Users").deleteRelation(
+    user,
+    "carts",
+    [game]
+)
+return await loadCart(user)
+}
+
+export async function emptyCart(user) {
+    const cart = await loadCart(user)
+    await Backendless.Data.of("Users").deleteRelation(
+        user,
+        "carts",
+        cart
+    ) 
+    return loadCart(user)
 }

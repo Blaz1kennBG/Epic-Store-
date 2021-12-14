@@ -28,7 +28,7 @@ const NavBarRight = ({ notify }) => {
             
             Backendless.UserService.getCurrentUser().then(u => {
                 if (u !== null) {
-                    console.log(u)
+                
                     setCurrentUser(u)
                     loadCart(u).then(res => setCart(res))
 
@@ -47,7 +47,8 @@ const NavBarRight = ({ notify }) => {
                         <div className={style["cart-item"]}>
                             cart <Link to="/cart" className={style["cart-number"]}>{cart.length}</Link>
                         </div>
-                    </li>}
+                    </li>
+                    }
                 {!currentUser &&
                     <>
                         <li className={style['register-list-item']} >

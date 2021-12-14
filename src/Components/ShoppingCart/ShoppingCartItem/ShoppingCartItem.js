@@ -1,7 +1,10 @@
 
 import { Icon } from '@iconify/react';
+
+
 import style from '../ShoppingCart.module.css'
-const ShoppingCartItem = ({game}) => {
+const ShoppingCartItem = ({game, removeHandler}) => {
+
     return ( 
         <div className={style["cart-item-container"]}>
 
@@ -21,7 +24,7 @@ const ShoppingCartItem = ({game}) => {
             <div className={style["price"]}>BGN {game.price}</div>
             <div className={style["options"]}>
                 <span>Move to wishlist</span>
-                <span>Remove</span>
+                <span onClick={() => removeHandler(game)}>Remove</span>
             </div>
         </div>
 
