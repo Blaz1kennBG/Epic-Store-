@@ -33,7 +33,7 @@ const Login = () => {
                     icon: false
                 }, 
                 success: {
-                    render({data}) {
+                    render({data}) {                       
                         setCurrentUser(data)
                         navigate("/")
                         return `Hello, ${username}`

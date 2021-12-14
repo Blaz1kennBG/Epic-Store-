@@ -14,12 +14,14 @@ const UploadGame = () => {
     const [publisher, setPublisher] = useState('')
     const [genres, setGenres] = useState([])
     const [price, setPrice] = useState('')
-    const [discount, setDiscount] = useState('')
+    const [discount, setDiscount] = useState(undefined)
     const [images, setImages] = useState([])
     const [gameLogo, setGameLogo] = useState(undefined)
     const [description, setDescription] = useState('')
     const [thumbnail, setGameThumbnail] = useState(undefined)
     const [isDiscounted, setIsDiscounted] = useState(false)
+    const [isAvailable, setIsAvailable] = useState(true)
+    const [availableDate, setAvailableDate] = useState('')
     const navigate = useNavigate()
 
     const submitHandler = (ev) => {
@@ -79,9 +81,15 @@ const UploadGame = () => {
                     defaultValue={genres} />
                 {genres.map(g => <div style={{ width: "100%" }} key={Math.random(0, 999)}>{g}</div>)}
                 <input type="number" name="price" placeholder="Price 0 is free, below 0 is not released" onChange={(ev) => setPrice(ev.target.value)} value={price} required/>
+
                 <span>Game is Discounted?</span>
                 <input type="checkbox" onChange={(ev) => setIsDiscounted(ev.target.checked)} />
                 {isDiscounted && <input type="number" name="discount" placeholder="discount %" onChange={(ev) => setDiscount(ev.target.value)} value={discount} required/>}
+
+                <span>Game is not available?</span>
+                <input type="checkbox" onChange={(ev) => setIsAvailable(ev.target.checked)} />
+                {!isAvailable && <input type="text" name="available" placeholder="Available date" onChange={(ev) => setAvailableDate(ev.target.value)} value={availableDate}/>}
+
                 <span>Screnshots of game "max 3"</span>
                 <input type="file" name="images" required onChange={(ev) => {
                     if (images.length < 3) {

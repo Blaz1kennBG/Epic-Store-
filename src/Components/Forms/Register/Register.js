@@ -43,6 +43,7 @@ const Register = () => {
             }, 
             success: {
                 render({data}) {
+                    
                     setCurrentUser(data)
                     navigate("/")
                     return `You have been registered. You can log in now.`

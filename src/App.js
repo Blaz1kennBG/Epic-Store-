@@ -20,6 +20,7 @@ import UploadArticle from './Components/Forms/UploadArticle/UploadArticle';
 import ArticleDetails from './Components/News/ArticleDetails/ArticleDetails';
 import ArticleTemplate from './Components/Forms/Article-Template/ArticleTemplate';
 import UploadGame from './Components/Forms/UploadGame/UploadGame';
+import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 function GuardedRoute({ children }) {
   const user = useRecoilValue(userState)
 
@@ -64,7 +65,11 @@ function App() {
                  </GuardedRoute>} />
             <Route path="/uploadArticle" element={<UploadArticle />} />
             <Route path="/uploadGame" element={<UploadGame />}/>
-
+            <Route path="/cart" element={
+              <GuardedRoute>
+            <ShoppingCart />
+            </GuardedRoute> } />
+            <Route path="*" element={<CardContainer />} />
           </Switch>
 
         </div>

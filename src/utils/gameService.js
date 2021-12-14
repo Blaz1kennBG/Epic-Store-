@@ -1,5 +1,4 @@
 import Backendless  from "backendless"
-import { toast } from "react-toastify"
 import { uploadImage } from "./cloudinary"
 
 export async function uploadGame(title,developer,description,publisher,genres,price,discount,images,gameLogo,thumbnail, isDiscounted) {
@@ -46,3 +45,18 @@ export async function uploadGame(title,developer,description,publisher,genres,pr
     return response
 }
 
+export async function addToCart(game, user) {
+    await Backendless.Data.of("Users").addRelation(
+        user, 
+        "carts",
+        [game]
+    )
+    return await loadCart(user)
+   
+}
+export async function loadCart(user) {
+    const loadRelationQueryBuilder = Backendless.LoadRelationsQueryBuilder.create()
+    loadRelationQueryBuilder.setRelationName( "carts" )
+   return await Backendless.Data.of("Users").loadRelations(user.objectId, loadRelationQueryBuilder)
+    
+}

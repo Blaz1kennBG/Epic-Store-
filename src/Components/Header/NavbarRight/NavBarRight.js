@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import Register from '../../Forms/Register/Register';
-import style from './NavBarRight.module.css'
-import { userState } from '../../../store/globalState'
-import Login from '../../Forms/Login/Login';
-import Backendless from 'backendless';
 
-const NavBarRight = ({notify}) => {
+import style from './NavBarRight.module.css'
+import { shoppingCartState, userState } from '../../../store/globalState'
+
+import Backendless from 'backendless';
+import { loadCart } from '../../../utils/gameService';
+
+const NavBarRight = ({ notify }) => {
     const [currentUser, setCurrentUser] = useRecoilState(userState)
+    const [cart, setCart] = useRecoilState(shoppingCartState)
     let navigate = useNavigate()
 
     const logoutHandler = () => {
@@ -18,58 +20,66 @@ const NavBarRight = ({notify}) => {
             notify("Logged out!")
         })
             .catch(e => {
-                navigate("/")                   
+                navigate("/")
             })
     }
-    useEffect( () => {
+    useEffect(() => {
         Backendless.UserService.isValidLogin().then(e => {
-           Backendless.UserService.getCurrentUser().then(u => {
-            if (u !== null) {
-                
-            setCurrentUser(u)
+            
+            Backendless.UserService.getCurrentUser().then(u => {
+                if (u !== null) {
+                    console.log(u)
+                    setCurrentUser(u)
+                    loadCart(u).then(res => setCart(res))
+
+                }
+            })
+        }).catch(e => console.log(e))
         
-            }
-        })
-        }
-        )
+       
     }, [])
 
     return (
         <>
             <ul className={style['header-right-list']}>
-                
-                { !currentUser &&
-                <>
-                <li className={style['register-list-item']} >
-                <div className={style['register-item']} >
-                    <Link to="/register">Register</Link>
-                </div>
-            </li>
-                <li className={style['singin-item-list-item']} >
-                    <div className={style['singin-item']}>
-                        <Link to="/login">Sign in</Link>
-                    </div>
-                    </li>
+                {currentUser &&
+                    <li className={style["cart-list-item"]}>
+                        <div className={style["cart-item"]}>
+                            cart <Link to="/cart" className={style["cart-number"]}>{cart.length}</Link>
+                        </div>
+                    </li>}
+                {!currentUser &&
+                    <>
+                        <li className={style['register-list-item']} >
+                            <div className={style['register-item']} >
+                                <Link to="/register">Register</Link>
+                            </div>
+                        </li>
+                        <li className={style['singin-item-list-item']} >
+                            <div className={style['singin-item']}>
+                                <Link to="/login">Sign in</Link>
+                            </div>
+                        </li>
                     </>
                 }
-                { currentUser  && 
-                <>
-                <li className={style['singin-item-list-item']} >
-                    <div className={style['singin-item']}>
-                        <Link to="/profile">Profile, {currentUser.username}</Link>
-                    </div>
-                    </li>
-                    <li className={style['register-list-item']} >
-                    <div className={style['register-item']}>
-                        <span onClick={logoutHandler}>Logout</span>
-                    </div>
-                    </li>
+                {currentUser &&
+                    <>
+                        <li className={style['singin-item-list-item']} >
+                            <div className={style['singin-item']}>
+                                <Link to="/profile">Profile, {currentUser.username}</Link>
+                            </div>
+                        </li>
+                        <li className={style['register-list-item']} >
+                            <div className={style['register-item']}>
+                                <span onClick={logoutHandler}>Logout</span>
+                            </div>
+                        </li>
                     </>
                 }
-               
+
             </ul>
-          
-            
+
+
         </>
 
     );

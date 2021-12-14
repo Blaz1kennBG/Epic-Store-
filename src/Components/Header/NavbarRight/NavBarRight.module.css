@@ -50,3 +50,25 @@
   .register-list-item:hover{
     background-color: rgb(66, 66, 66);
   }
+  .cart-number {
+    padding: 2px 15px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+.cart-list-item {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  height: 100%;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  padding: 23px 10px;
+}
+.cart-item {
+text-transform: uppercase;
+}
+.cart-list-item:hover {
+    background-color: rgb(66, 66, 66);
+}

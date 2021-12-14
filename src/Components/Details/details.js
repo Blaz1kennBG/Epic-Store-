@@ -4,43 +4,70 @@ import {useParams } from 'react-router';
 import style from './details.module.css'
 
 import { useRecoilState } from 'recoil';
-import { userState } from '../../store/globalState';
-import { ToastContainer, toast } from 'react-toastify';
+import { shoppingCartState, userState } from '../../store/globalState';
+import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import MainDisplay from './MainDisplay/MainDisplay';
+import { addToCart } from '../../utils/gameService';
 
 const Details = () => {
     const [game, setGame] = useState(undefined)
     const params = useParams()
     const [currentUser, setCurrentUser] = useRecoilState(userState)
-    const notify = () => toast("Game has been bought.!")
+    const [cart, setCart] = useRecoilState(shoppingCartState)
+
     
     const gameActionHandler = (action) => {
       
         const updatedUser = new Backendless.User()
         updatedUser.objectId = currentUser.objectId
+        let msg = ''
         if (action === 'buy') {
             updatedUser.gamesBought = [...currentUser.gamesBought]
             updatedUser.gamesBought.push(game)
+            msg = 'Game has been bought.'
+
+            Backendless.UserService.update(updatedUser)
+            .then(responseUpdate => {
+            setCurrentUser(responseUpdate)
+            toast(msg)
+            console.log(action)
+
+        })
+        .catch(e => toast(e))
         }
       if (action === 'wishlist') {
         updatedUser.wishlist = [...currentUser.wishlist]
         updatedUser.wishlist.push(game)
-      }
+        msg = 'Game has been wishlisted.'
+
         Backendless.UserService.update(updatedUser)
-            .then(responseUpdate => {
-            setCurrentUser(responseUpdate)
-            notify()
-            console.log(action)
-        })
-            .catch(e => console.log(e))
+        .then(responseUpdate => {
+        setCurrentUser(responseUpdate)
+        toast(msg)
+        console.log(action)
+
+    })
+    .catch(e => toast(e))
+      }
+      if (action === "addtocart") {
+          updatedUser.cart = [...cart]
+          updatedUser.cart.push(game)
+          msg = 'Game has been added to cart.'
+          addToCart(game, currentUser).then(e => 
+            {
+               setCart(e)
+                toast(msg)
+                
+            })
+      }
+       
     }
 
     useEffect(() => {
-        Backendless.Data.of('Games').findById(params.id).then(g => {
-            
+        Backendless.Data.of('Games').findById(params.id).then(g => {       
             setGame(g)
         })
     }, [])

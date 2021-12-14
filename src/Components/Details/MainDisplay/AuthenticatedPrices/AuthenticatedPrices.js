@@ -5,7 +5,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
     const [isOwned, setOwned] = useState(false)
     const [isWishlisted, setWishlisted] = useState(false)
     useEffect(() => {
-        console.log(game)
+       
         currentUser.gamesBought.some(g => {
             if (g.objectId === game.objectId) { 
                 return setOwned(true) }
@@ -85,9 +85,16 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
                     <button className={style["wishlist-btn"]} 
                     onClick={() => gameActionHandler('wishlist')}
                     disabled={isWishlisted ? true : false}
-                    >{isWishlisted ? "Game is wishlisted" : "Add to library"}</button>
+                    >{isWishlisted ? "Game is wishlisted" : "Add to wishlist"}</button>
                 </>
             }
+            <button className={style['wishlist-btn']}
+            disabled={isOwned ? true : false}
+            style={{background: "black"}}
+            onClick={() => gameActionHandler('addtocart')}
+            >
+            Add to cart.
+            </button>
         </>
     );
 }

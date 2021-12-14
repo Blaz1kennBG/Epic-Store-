@@ -12,3 +12,7 @@ export const originalGamesState = atom({
     key: "originalGamesState",
     default: undefined
 })
+export const shoppingCartState = atom({
+    key: "shoppingCartState",
+    default: []
+})

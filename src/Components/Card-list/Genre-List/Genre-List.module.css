@@ -12,25 +12,39 @@
       cursor: pointer;
       transition: background-color 0.5s ease;
     }
-    .genre-list-item:hover {
+    .genre-list-item:hover, .genre-list-item:active {
       background-color: #363636;
       
     }
-    .genre-list-header, .genre-clear {
-      padding-bottom: 20px;
-      padding-left: 10px;
-      padding-right: 10px;
-      font-size: 24px;
+    .active {
+      background-color: #363636;
+    }
+
+    .genre-list-header {
+      color: white;
+      font-size: 19px;
+      letter-spacing: 0.2px;
+      line-height: 1.4;
+      list-style: none;
+      padding: 0px 10px;
+      margin-bottom: 12px;
+     
+    }
+     .genre-clear {
+
+     margin: 8px 0;
+      padding: 10px 10px;
+      font-size: 19px;
+      text-transform: uppercase;
       letter-spacing: 0.2px;
       line-height: 1.4;
       color: rgb(141, 141, 141);
       list-style: none;
+      transition: background-color 0.5s ease;
+      cursor: pointer;
     }
 
-    .genre-clear {
-      padding: 14px 10px;
-      transition: background-color 0.5s ease;
-    }
     .genre-clear:hover {
       background-color: #363636;
     }
+  

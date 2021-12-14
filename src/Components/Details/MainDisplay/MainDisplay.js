@@ -17,12 +17,12 @@ const MainDisplay = ({ game, gameActionHandler }) => {
                 <div className={style["media-and-description"]}>
                     <ImageCarousel game={game} />
                 </div>
-
+                <GenresFeatures game={game} />
                 <div className={style["details-description"]}>
                     {game.description}
                 </div>
 
-                <GenresFeatures game={game} />
+               
             </div>
 
             <div className={style["game-info-container"]}>
