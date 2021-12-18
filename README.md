@@ -1,3 +1,15 @@
+# Epic Games Store project
+
+# Tech Stack ReactJS/Cloudinary/Backendless.
+
+Supports the current functionality: 
+1. Authentication
+2. Adding games to library/wishlist
+3. Removing games from library/wishlist
+4. Shopping Cart
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
