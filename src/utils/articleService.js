@@ -14,7 +14,7 @@ export async function uploadArticle  (file, title, description, developer) {
         })
         .catch(e => 
             {
-            console.log(e)
+        
             toast(e)
             })  
     })

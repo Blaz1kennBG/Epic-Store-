@@ -14,13 +14,13 @@ const CheckoutSection = () => {
                 <div className={style["payment-methods"]}>
                     <span>Other payment methods</span>
                     <div className={style["method"]}>
-                        <input type="radio" name='payment' />
+                        <input type="radio" name='payment' required/>
                         <Icon className={style["iconify"]} icon="ri:bank-card-fill"></Icon>
                         <span>Credit Card</span>
                     </div>
 
                     <div className={style["method"]}>
-                        <input type="radio" name='payment' />
+                        <input type="radio" name='payment' required/>
                         <Icon className={style["iconify"]} icon="logos:paypal"></Icon>
                         <span>Paypal</span>
                     </div>
