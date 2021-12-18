@@ -1,9 +1,19 @@
 
 import { Icon } from '@iconify/react';
+import { useEffect, useState } from 'react';
 
 
 import style from '../ShoppingCart.module.css'
 const ShoppingCartItem = ({game, removeHandler}) => {
+    const [gamePrice, setGamePrice] = useState(0)
+
+    useEffect(() => {
+        if (game.discount > 0) {
+        
+        return   setGamePrice(game.price - (game.price * (game.discount / 100)).toFixed(2))
+        }
+        return setGamePrice(game.price)
+    }, [])
 
     return ( 
         <div className={style["cart-item-container"]}>
@@ -21,8 +31,16 @@ const ShoppingCartItem = ({game, removeHandler}) => {
         </div>
 
         <div className={style["prices-and-options"]}>
-            <div className={style["price"]}>BGN {game.price}</div>
-            <div className={style["options"]}>
+            
+            <div className={style["price"]}>
+                {game.discount > 0 &&
+                <>
+                <span className={style['discount']}>{game.discount}%</span>
+                <span className={style["oldPrice"]}>{game.price}</span>
+                </>
+                }
+                BGN {gamePrice}</div>
+            <div className={style["shopping-options"]}>
                 <span>Move to wishlist</span>
                 <span onClick={() => removeHandler(game)}>Remove</span>
             </div>

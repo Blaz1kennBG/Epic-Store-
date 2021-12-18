@@ -8,18 +8,24 @@ const GenreList = () => {
 
     const genreHandler = (selectedGenre) => {
         if (games) {
+            if (selectedGenre !== "on_sale") {
+                const filtered = backupGames.filter(item => {
+                    return item.props.game.genres.includes(selectedGenre)
+                },
+                )
+                console.log(filtered)
+                return setGames(filtered)
+            }
             const filtered = backupGames.filter(item => {
-                return item.props.game.genres.includes(selectedGenre)
-            },
-            )
-            console.log(filtered)
-            setGames(filtered)
+                return item.props.game.discount > 0
+
+            })
+            return setGames(filtered)
         }
     }
     const setActive = (ev) => {
-        if (!ev.target.classList.contains(style["active"]))
-       { return ev.target.classList.add(style["active"]) }
-        return ev.target.classList.remove(style["active"])
+       /*  if (!ev.target.classList.contains(style["active"])) { return ev.target.classList.add(style["active"]) }
+        return ev.target.classList.remove(style["active"]) */
     }
 
 
@@ -28,13 +34,14 @@ const GenreList = () => {
             <ul className={style['genre-list']}>
                 <li className={style['genre-list-header']}>Filters</li>
                 <li className={style['genre-clear']} onClick={() => setGames(backupGames)}>Clear filters</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Action"); setActive(ev) }}>Action</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Adventure"); setActive(ev)}} >Adventure</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Indie"); setActive(ev)}} >Indie</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("RPG"); setActive(ev)}} >RPG</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Open-World"); setActive(ev)}} >Open World</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Shooter"); setActive(ev)}} >Shooter</li>
-                <li className={style['genre-list-item']} onClick={(ev) => {genreHandler("Casual"); setActive(ev)}} >Casual</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Action"); setActive(ev) }}>Action</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Adventure"); setActive(ev) }} >Adventure</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Indie"); setActive(ev) }} >Indie</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("RPG"); setActive(ev) }} >RPG</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Open-World"); setActive(ev) }} >Open World</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Shooter"); setActive(ev) }} >Shooter</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Casual"); setActive(ev) }} >Casual</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("on_sale"); setActive(ev) }} >On sale</li>
             </ul>
         </div>
     );

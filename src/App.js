@@ -45,7 +45,7 @@ function App() {
 
           <Switch>
             <Route exact path="/" element={<CardContainer />} />
-            <Route path="/test" element={<TestComponent />} />
+           {/*  <Route path="/test" element={<TestComponent />} /> */}
             <Route path="/details/:id" element={<Details />} />
             <Route path="/register" element={
               <UnGuardedRoute>

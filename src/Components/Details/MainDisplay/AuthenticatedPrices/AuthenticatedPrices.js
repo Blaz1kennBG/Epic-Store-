@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { userState } from "../../../../store/globalState";
+import Checkout from "../../../Checkout/Checkout";
 import style from "../MainDisplay.module.css"
 
-const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
+const AuthenticatedPrices = ({ game, gameActionHandler, checkout, setCheckout }) => {
     const [isOwned, setOwned] = useState(false)
     const [isWishlisted, setWishlisted] = useState(false)
+    const [currentUser, setCurrentUser] = useRecoilState(userState)
+    
     useEffect(() => {
-       
+        
         currentUser.gamesBought.some(g => {
-            if (g.objectId === game.objectId) { 
-                return setOwned(true) }
+            if (g.objectId === game.objectId) {
+                return setOwned(true)
+            }
         })
         currentUser.wishlist.some(g => {
             if (g.objectId === game.objectId) {
                 return setWishlisted(true)
             }
         })
-    })
+    }, [currentUser])
     return (
         <>
+      {checkout && <Checkout game={game} setCheckout={setCheckout} gameActionHandler={gameActionHandler}/>}
             <div className={style["game-prices"]}>
 
                 {game.isDiscounted &&
@@ -34,7 +41,7 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
 
                         {game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
                             : game.price === 0 ? <span className={style['discounted-price']}>Free</span>
-                                : 
+                                :
                                 <span className={style['discounted-price']}
                                     disabled={currentUser ? false : true}
                                     style={{ background: !currentUser ? "#2A2A2A" : "" }}
@@ -47,33 +54,37 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
 
 
             </div>
-          {/*   if game is free */}
+            {/*   if game is free */}
             {game.price === 0 &&
                 <>
-                    <button className={style["buy-btn"]} 
-                    onClick={() => gameActionHandler('buy')}
-                    disabled={isOwned ? true : false}
-                    style={{ background: isOwned ? "#2A2A2A" : "" }}
+                    <button className={style["buy-btn"]}
+                        onClick={() => /* gameActionHandler('addtocart') */
+                    setCheckout(!checkout)
+                    }
+                        disabled={isOwned ? true : false}
+                        style={{ background: isOwned ? "#2A2A2A" : "" }}
                     >{isOwned ? "You own this" : "Add to library"}</button>
                 </>
             }
-        {/*     If game is released and has a price */}
+            {/*     If game is released and has a price */}
             {game.price > 0 &&
                 <>
-                           <button
-                           disabled={isOwned ? true : false}
-                           style={{ background: isOwned ? "#2A2A2A" : "" }}
-                           onClick={() => gameActionHandler('buy')}
-                           className={style["buy-btn"]}>{isOwned ? "You already own this!" : "Buy now"}
-                            </button>
-                    
-                    <button className={style["wishlist-btn"]} 
-                    onClick={() => gameActionHandler('wishlist')}
-                    disabled={isWishlisted ? true : false}
+                    <button
+                        disabled={isOwned ? true : false}
+                        style={{ background: isOwned ? "#2A2A2A" : "" }}
+                        onClick={() => /* gameActionHandler('addtocart') */
+                    setCheckout(!checkout)
+                    }
+                        className={style["buy-btn"]}>{isOwned ? "You already own this!" : "Buy now"}
+                    </button>
+
+                    <button className={style["wishlist-btn"]}
+                        onClick={() => gameActionHandler('wishlist')}
+                        disabled={isWishlisted ? true : false}
                     >{isWishlisted ? "Game is wishlisted" : "Add to wishlist"}</button>
                 </>
             }
-           {/*  If game is not released yet */}
+            {/*  If game is not released yet */}
             {game.price < 0 &&
                 <>
                     <button
@@ -82,19 +93,21 @@ const AuthenticatedPrices = ({ game, currentUser, gameActionHandler }) => {
                         disabled={true}
                         className={style["buy-btn"]}>Buy Now</button>
 
-                    <button className={style["wishlist-btn"]} 
-                    onClick={() => gameActionHandler('wishlist')}
-                    disabled={isWishlisted ? true : false}
+                    <button className={style["wishlist-btn"]}
+                        onClick={() => gameActionHandler('wishlist')}
+                        disabled={isWishlisted ? true : false}
                     >{isWishlisted ? "Game is wishlisted" : "Add to wishlist"}</button>
                 </>
             }
-            <button className={style['wishlist-btn']}
-            disabled={isOwned ? true : false}
-            style={{background: "black"}}
-            onClick={() => gameActionHandler('addtocart')}
-            >
-            Add to cart.
-            </button>
+            
+          
+
+                {game.availableDate === null && game.price > 0 && null && <button className={style['wishlist-btn']}
+                disabled={isOwned ? true : false}
+                style={{ background: "black" }}
+                onClick={() => /* gameActionHandler('addtocart') */
+                setCheckout(!checkout)
+                } >Add to cart. </button>}
         </>
     );
 }

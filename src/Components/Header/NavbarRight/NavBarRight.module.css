@@ -67,6 +67,7 @@
   padding: 23px 10px;
 }
 .cart-item {
+  color: white;
 text-transform: uppercase;
 }
 .cart-list-item:hover {

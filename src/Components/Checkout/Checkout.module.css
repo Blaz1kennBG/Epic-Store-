@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+* {
+    font-family: Roboto;
+}
+.modal {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.5);
+    opacity: 1;
+    z-index: 99998;
+}
+.checkout-container {
+  display: flex;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    z-index: 99999;
+    max-height: 80vh;
+    border: none;
+    background-color: white;
+    max-width: 1200px;
+    width: 100%;
+}
+.checkout-section {
+    margin-left: 20px;
+   display: flex;
+   flex-direction: column;
+    flex-basis: 100%;
+}
+.coupon {
+    display: flex;
+    flex-direction: column;
+}
+/* Checkout */ 
+.checkout-section > span:nth-child(1) {
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgb(0, 120, 242);
+    text-transform: uppercase;
+}
+/* epic coupons */
+.coupon span:nth-child(1) {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+/* No eligible coupons */
+.coupon span:nth-child(2) {
+    margin: 10px 0;
+    background: rgb(242, 242, 242);
+    padding: 25px 20px;
+    width: 98%;
+}
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+}
+.payment-methods span:first-child {
+    margin: 15px 0px;
+}
+.payment-methods > .method > *{
+    padding: 5px;
+    margin: 0 10px;
+}
+.payment-methods .iconify {
+    width: 75px;
+    padding: 2px;
+    font-size: 40px;
+    color: grey;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 10px;
+}
+.method{
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgb(242, 242, 242);
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 9px;
+}
+.method input[type = "radio"] {
+    background: rgb(242, 242, 242);
+    height: 50px;
+    width: 25px;
+}
+
+.order-summary {
+    
+    background: rgb(242, 242, 242);
+    padding: 30px 25px;
+  
+    display: flex;
+    flex-direction: column;
+}
+.order-summary > span:first-child {
+    font-weight: bold;
+    font-size: 20px;
+
+    margin-bottom: 15px;
+
+}
+.img-container {
+    width: 260px;
+    height: 360px;
+}
+.img-container img{
+    width: 100%;
+    height: 100%;
+}
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+.text-container * {
+    font-size: 15px;
+}
+
+/* Game name and devloper selectors */
+.developer, 
+.game-title {
+    width: 100%;
+}
+.game-title {
+    font-weight: bold;
+    color: black;
+    margin-top: 10px;
+}
+.developer {
+    margin-top: 0px;
+    color: rgba(20,20,20,0.75);
+}
+.price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.vat {
+    border-bottom: 1px solid grey;
+    padding-bottom: 15px;
+    color: rgba(20,20,20,0.75); 
+    font-size: 14px; 
+}
+
+
+.price > *{
+    color: rgba(20,20,20,0.75); 
+}
+.btn {
+    width: 48%;
+    margin-top: 25px;
+    background-color: #0078f2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+}

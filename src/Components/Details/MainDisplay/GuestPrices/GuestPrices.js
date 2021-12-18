@@ -1,70 +1,69 @@
 import style from "../MainDisplay.module.css"
 
-const GuestPrices = ({game}) => {
-    return (  
+const GuestPrices = ({ game }) => {
+    return (
         <>
-        <div className={style["game-prices"]}>
+            <div className={style["game-prices"]}>
 
-            {game.isDiscounted &&
+                {game.isDiscounted &&
+                    <>
+
+                        <span className={style["discount-percentage"]}>-{game.discount}%</span>
+                        <span className={style["full-price"]}>{game.price}BGN</span>
+                        <span className={style["discounted-price"]}
+                        >{(game.price - (game.price * (game.discount / 100))).toFixed(2)} BGN</span>
+
+                    </>
+                }
+                {game.isDiscounted === false &&
+                    <>
+
+                        {game.price > 0 ?
+                            <span className={style['discounted-price']}>{game.price} BGN</span>
+                            : game.price === 0 ?
+                                <span className={style['discounted-price']}>Free</span>
+                                : <span className={style['discounted-price']}
+                                    disabled={true}>Available: {game.availableDate}</span>
+
+                        }
+                    </>
+                }
+
+
+            </div>
+            {game.price === 0 &&
                 <>
-
-                    <span className={style["discount-percentage"]}>-{game.discount}%</span>
-                    <span className={style["full-price"]}>{game.price}BGN</span>
-                    <span className={style["discounted-price"]}
-                    >{(game.price - (game.price * (game.discount / 100))).toFixed(2)} BGN</span>
+                    <button className={style["buy-btn"]}>Login to add to wishlist</button>
 
                 </>
             }
-            {game.isDiscounted === false &&
+            {game.price > 0 &&
                 <>
 
-                    {game.price > 0 ? <span className={style['discounted-price']}>{game.price} BGN</span>
-                        : game.price === 0 ? <span className={style['discounted-price']}>Free</span>
-                            : <span className={style['discounted-price']}
-                                disabled={true}
-                                style={{ background: "#2A2A2A" }}
-                            >Available: {game.availableDate}</span>
-
-                    }
-                </>
-            }
-
-
-        </div>
-        {game.price === 0 &&
-            <>
-                <button className={style["buy-btn"]}>Add to library</button>
-
-            </>
-        }
-        {game.price > 0 &&
-            <>
-                 
                     <button
-                    disabled={true}
-                    style={{ background: "#2A2A2A" }}
-                  
-                    className={style["buy-btn"]}>Buy Now
-                    </button>
-                
-                <button
-                    disabled={true}
-                    className={style["wishlist-btn"]}>Add to wishlist
-                </button>
-            </>
-        }
-        {game.price < 0 &&
-            <>
-                <button
+                        disabled={true}
+                        style={{ background: "#2A2A2A" }}
 
-                    style={{ background: "#2A2A2A" }}
-                    disabled={true}
-                    className={style["buy-btn"]}>Buy Now</button>
-                <button className={style["wishlist-btn"]}>Add to wishlist</button>
-            </>
-        }
-    </>
+                        className={style["buy-btn"]}>Login to buy
+                    </button>
+
+                    <button
+                        disabled={true}
+                        className={style["wishlist-btn"]}>Login to add to wishlist
+                </button>
+                </>
+            }
+            {game.price < 0 &&
+                <>
+                  {/*   <button
+                        style={{ background: "#2A2A2A" }}
+                        disabled={true}
+                        className={style["buy-btn"]}>Login to buy</button> */}
+                    <button className={style["wishlist-btn"]}>Login to add to wishlist</button>
+                </>
+            }
+        </>
     );
 }
- 
+
 export default GuestPrices;

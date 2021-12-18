@@ -83,11 +83,29 @@
     text-align: right;
     color: white;
 }
-.options * {
+.discount {
+    padding: 2px 15px;
+    background-color: rgb(0, 125, 252);
+    margin: 0 7px;
+    border-radius: 5px;
+}
+.oldPrice {
+    text-decoration: line-through;
+    padding: 2px 15px;
+    background-color: #494949;
+    margin: 0 7px;
+    border-radius: 5px;
+}
+.shopping-options * {
     border-bottom: 1px solid  rgba(245,245,245, 0.6);
     margin-left: 18px;
     color: rgba(245,245,245, 0.6);
     cursor: pointer;
+   
+}
+.shopping-options {
+    display: flex;
+    justify-content: flex-end;
 }
 .purchase-info {
     display: flex;
@@ -152,3 +170,4 @@ color: white;
     padding-bottom: 5px;
     border-bottom: 1px solid gray;
 }
+

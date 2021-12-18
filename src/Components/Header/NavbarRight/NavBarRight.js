@@ -7,6 +7,7 @@ import { shoppingCartState, userState } from '../../../store/globalState'
 
 import Backendless from 'backendless';
 import { loadCart } from '../../../utils/gameService';
+import { priceReducer } from '../../../utils/reducers';
 
 const NavBarRight = ({ notify }) => {
     const [currentUser, setCurrentUser] = useRecoilState(userState)
@@ -45,7 +46,7 @@ const NavBarRight = ({ notify }) => {
                 {currentUser &&
                     <li className={style["cart-list-item"]}>
                         <div className={style["cart-item"]}>
-                            cart <Link to="/cart" className={style["cart-number"]}>{cart.length}</Link>
+                cart <Link to="/cart" className={style["cart-number"]}>[ {cart.length} ], BGN {cart.reduce(priceReducer, 0)}</Link>
                         </div>
                     </li>
                     }
@@ -67,7 +68,7 @@ const NavBarRight = ({ notify }) => {
                     <>
                         <li className={style['singin-item-list-item']} >
                             <div className={style['singin-item']}>
-                                <Link to="/profile">Profile, {currentUser.username}</Link>
+                                <Link to="/profile">{currentUser.username}</Link>
                             </div>
                         </li>
                         <li className={style['register-list-item']} >

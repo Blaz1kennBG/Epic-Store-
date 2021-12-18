@@ -17,7 +17,8 @@ const Details = () => {
     const params = useParams()
     const [currentUser, setCurrentUser] = useRecoilState(userState)
     const [cart, setCart] = useRecoilState(shoppingCartState)
-
+    const [checkout, setCheckout] = useState(false)
+    
     
     const gameActionHandler = (action) => {
       
@@ -28,15 +29,20 @@ const Details = () => {
             updatedUser.gamesBought = [...currentUser.gamesBought]
             updatedUser.gamesBought.push(game)
             msg = 'Game has been bought.'
+            const removeFromWishList = currentUser.wishlist.filter(e => e.objectId !== game.objectId)
 
+             if (removeFromWishList) {
+                updatedUser.wishlist = removeFromWishList
+            } 
             Backendless.UserService.update(updatedUser)
             .then(responseUpdate => {
             setCurrentUser(responseUpdate)
+            setCheckout(!checkout)
             toast(msg)
             console.log(action)
 
         })
-        .catch(e => toast(e))
+        .catch(e => toast(e)) 
         }
       if (action === 'wishlist') {
         updatedUser.wishlist = [...currentUser.wishlist]
@@ -58,6 +64,7 @@ const Details = () => {
           msg = 'Game has been added to cart.'
           addToCart(game, currentUser).then(e => 
             {
+                
                setCart(e)
                 toast(msg)
                 
@@ -81,7 +88,7 @@ const Details = () => {
                     <div className={style["details-title"]}>
                         <p>{game.title}</p>
                     </div>
-                 <MainDisplay game={game} gameActionHandler={gameActionHandler}/>
+                 <MainDisplay game={game} gameActionHandler={gameActionHandler} setCheckout={() => setCheckout(!checkout)} checkout={checkout}/>
                 </div>
             }
         </>

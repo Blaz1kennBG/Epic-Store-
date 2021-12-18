@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../store/globalState";
 import DeveloperPublisher from "./DeveloperPublisher/DeveloperPublisher";
@@ -7,8 +7,10 @@ import ImageCarousel from "./ImageCarousel/ImageCarousel";
 import style from "./MainDisplay.module.css"
 import AuthenticatedPrices from "./AuthenticatedPrices/AuthenticatedPrices";
 import GuestPrices from './GuestPrices/GuestPrices'
-const MainDisplay = ({ game, gameActionHandler }) => {
+const MainDisplay = ({ game, gameActionHandler, checkout, setCheckout }) => {
     const currentUser = useRecoilValue(userState)
+
+    
 
     return (
         <div className={style["main-display-container"]}>
@@ -29,7 +31,7 @@ const MainDisplay = ({ game, gameActionHandler }) => {
                 <div className={style["game-info-image"]}>
                     <img src={game.gameLogo} />
                 </div>
-               {currentUser && <AuthenticatedPrices game={game} currentUser={currentUser} gameActionHandler={gameActionHandler}/> }
+               {currentUser && <AuthenticatedPrices game={game} currentUser={currentUser} gameActionHandler={gameActionHandler} checkout={checkout} setCheckout={setCheckout} /> }
                {!currentUser && <GuestPrices game={game} />}
                 <DeveloperPublisher game={game} />
 
