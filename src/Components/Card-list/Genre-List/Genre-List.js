@@ -13,7 +13,7 @@ const GenreList = () => {
                     return item.props.game.genres.includes(selectedGenre)
                 },
                 )
-                console.log(filtered)
+               
                 return setGames(filtered)
             }
             const filtered = backupGames.filter(item => {
@@ -23,10 +23,6 @@ const GenreList = () => {
             return setGames(filtered)
         }
     }
-    const setActive = (ev) => {
-       /*  if (!ev.target.classList.contains(style["active"])) { return ev.target.classList.add(style["active"]) }
-        return ev.target.classList.remove(style["active"]) */
-    }
 
 
     return (
@@ -34,14 +30,14 @@ const GenreList = () => {
             <ul className={style['genre-list']}>
                 <li className={style['genre-list-header']}>Filters</li>
                 <li className={style['genre-clear']} onClick={() => setGames(backupGames)}>Clear filters</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Action"); setActive(ev) }}>Action</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Adventure"); setActive(ev) }} >Adventure</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Indie"); setActive(ev) }} >Indie</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("RPG"); setActive(ev) }} >RPG</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Open-World"); setActive(ev) }} >Open World</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Shooter"); setActive(ev) }} >Shooter</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Casual"); setActive(ev) }} >Casual</li>
-                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("on_sale"); setActive(ev) }} >On sale</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Action") }}>Action</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Adventure") }} >Adventure</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Indie") }} >Indie</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("RPG") }} >RPG</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Open-World") }} >Open World</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Shooter") }} >Shooter</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("Casual") }} >Casual</li>
+                <li className={style['genre-list-item']} onClick={(ev) => { genreHandler("on_sale") }} >On sale</li>
             </ul>
         </div>
     );

@@ -70,18 +70,16 @@ const AuthenticatedPrices = ({ game, gameActionHandler, checkout, setCheckout })
             {game.price > 0 &&
                 <>
                     <button
-                        disabled={isOwned ? true : false}
+                        disabled={isOwned || isWishlisted ? true : false}
                         style={{ background: isOwned ? "#2A2A2A" : "" }}
-                        onClick={() => /* gameActionHandler('addtocart') */
-                    setCheckout(!checkout)
-                    }
+                        onClick={() => setCheckout(!checkout) }
                         className={style["buy-btn"]}>{isOwned ? "You already own this!" : "Buy now"}
                     </button>
 
                     <button className={style["wishlist-btn"]}
                         onClick={() => gameActionHandler('wishlist')}
-                        disabled={isWishlisted ? true : false}
-                    >{isWishlisted ? "Game is wishlisted" : "Add to wishlist"}</button>
+                        disabled={isOwned || isWishlisted ? true : false}
+                    >{isWishlisted ? "Game is wishlisted" : isOwned ? "You already own this game" : "Add to wishlist"}</button>
                 </>
             }
             {/*  If game is not released yet */}
@@ -102,12 +100,11 @@ const AuthenticatedPrices = ({ game, gameActionHandler, checkout, setCheckout })
             
           
 
-                {game.availableDate === null && game.price > 0 && null && <button className={style['wishlist-btn']}
+                {game.availableDate === null && game.price > 0 && <button className={style['wishlist-btn']}
                 disabled={isOwned ? true : false}
                 style={{ background: "black" }}
-                onClick={() => /* gameActionHandler('addtocart') */
-                setCheckout(!checkout)
-                } >Add to cart. </button>}
+                onClick={() => gameActionHandler('addtocart') }
+                 >Add to cart. </button>}
         </>
     );
 }

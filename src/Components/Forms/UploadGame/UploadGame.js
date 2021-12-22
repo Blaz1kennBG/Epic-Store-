@@ -82,15 +82,16 @@ const UploadGame = () => {
                 {genres.map(g => <div style={{ width: "100%" }} key={Math.random(0, 999)}>{g}</div>)}
                 <input type="number" name="price" placeholder="Price 0 is free, below 0 is not released" onChange={(ev) => setPrice(ev.target.value)} value={price} required/>
 
-                <span>Game is Discounted?</span>
-                <input type="checkbox" onChange={(ev) => setIsDiscounted(ev.target.checked)} />
+                <span style={{color: "white"}}>Game is Discounted?</span>
+                <input  type="checkbox" onChange={(ev) => setIsDiscounted(ev.target.checked)} />
                 {isDiscounted && <input type="number" name="discount" placeholder="discount %" onChange={(ev) => setDiscount(ev.target.value)} value={discount} required/>}
 
-                <span>Game is not available?</span>
+                <span style={{color: "white"}}>Game is not available?</span>
                 <input type="checkbox" onChange={(ev) => setIsAvailable(ev.target.checked)} />
                 {!isAvailable && <input type="text" name="available" placeholder="Available date" onChange={(ev) => setAvailableDate(ev.target.value)} value={availableDate}/>}
 
-                <span>Screnshots of game "max 3"</span>
+                <span style={{color: "white"}}>Screnshots of game "max 3"</span>
+
                 <input type="file" name="images" required onChange={(ev) => {
                     if (images.length < 3) {
                         if (ev.target.files[0] === undefined) { return }
@@ -99,10 +100,11 @@ const UploadGame = () => {
                         return setImages(_images)
                     }
                     return toast("Maximum of 3 images only.")
-                }} />
-                <span>Game Logo</span>
+                }} 
+                />
+                <span style={{color: "white"}}>Game Logo</span>
                 <input type="file" name="gameLogo" required onChange={(ev) => setGameLogo(ev.target.files[0])}/>
-                <span>Game Thumbnail</span>
+                <span style={{color: "white"}}>Game Thumbnail</span>
                 <input type="file" name="gameLogo" required onChange={(ev) => setGameThumbnail(ev.target.files[0])}/>
                 <input type="submit" name="submit" value="List the game" />
             </form>

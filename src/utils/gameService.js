@@ -49,6 +49,7 @@ export async function buyGamesInCart(user, cart) {
     updatedUser.objectId = user.objectId
     updatedUser.gamesBought = [...user.gamesBought]
     for (let game of cart) {
+
         updatedUser.gamesBought.push(game)
     }
   const response = await Backendless.UserService.update(updatedUser)

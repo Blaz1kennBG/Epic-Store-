@@ -1,5 +1,5 @@
 import style from './Checkout.module.css'
-import { Icon } from "@iconify/react"
+
 import { useEffect, useState } from 'react';
 import CheckoutSection from './CheckoutSection/CheckoutSection';
 const Checkout = ({ game, setCheckout, gameActionHandler }) => {

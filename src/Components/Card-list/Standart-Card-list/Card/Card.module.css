@@ -30,11 +30,11 @@
   }
   
   .card-title {
-    width: 100%;
+    width: 92%;
     color: rgb(245, 245, 245);
     font-family: Roboto;
     font-weight: Regular;
-    font-size: 22px;
+    font-size: 18px;
     opacity: 1;
     text-align: left;
   }

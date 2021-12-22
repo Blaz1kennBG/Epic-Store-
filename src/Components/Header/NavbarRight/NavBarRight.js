@@ -46,7 +46,7 @@ const NavBarRight = ({ notify }) => {
                 {currentUser &&
                     <li className={style["cart-list-item"]}>
                         <div className={style["cart-item"]}>
-                cart <Link to="/cart" className={style["cart-number"]}>[ {cart.length} ], BGN {cart.reduce(priceReducer, 0)}</Link>
+                cart <Link to="/cart" className={style["cart-number"]}>[ {cart.length} ], BGN {(cart.reduce(priceReducer, 0)).toFixed(2)}</Link>
                         </div>
                     </li>
                     }
@@ -69,13 +69,19 @@ const NavBarRight = ({ notify }) => {
                         <li className={style['singin-item-list-item']} >
                             <div className={style['singin-item']}>
                                 <Link to="/profile">{currentUser.username}</Link>
-                            </div>
+                            </div>  
                         </li>
                         <li className={style['register-list-item']} >
                             <div className={style['register-item']}>
                                 <span onClick={logoutHandler}>Logout</span>
                             </div>
                         </li>
+                        { currentUser.objectId === "E93FA418-D2E5-4ECA-A136-EE0423FA3971" &&
+                        <li className={style['singin-item-list-item']} >
+                            <div className={style['singin-item']}>
+                                <Link to="/adminpanel">admin panel</Link>
+                            </div>  
+                        </li>}
                     </>
                 }
 

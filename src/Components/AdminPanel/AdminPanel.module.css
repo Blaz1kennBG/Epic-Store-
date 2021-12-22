@@ -1,0 +1,146 @@
+.admin-panel-container {
+    position: absolute;
+    top: 0;
+
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgb(199, 198, 198);
+    display: flex;
+}
+
+.side-bar {
+
+    background: rgb(209, 72, 91);
+    display: flex;
+    flex-wrap: wrap;
+    width: 15%;
+    height: 100%;
+}
+
+.side-bar-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.side-bar-list ul {
+    padding: 0;
+}
+
+.side-bar-list li {
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 35px;
+    margin: 10px 0;
+    padding: 10px;
+    list-style: none;
+    transition: background-color 0.25s;
+}
+
+.side-bar-list li span, .side-bar-list li a {
+    width: 100%;
+    color: white;
+    font-size: 35px;
+    margin: 10px 0;
+
+    list-style: none;
+    transition: background-color 0.25s;
+}
+
+.side-bar-list li:hover {
+    background-color: rgb(253, 71, 96);
+    
+}
+
+.profile {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.avatar {
+    margin-bottom: 55px;
+    width: 100px;
+    height: 100px;
+    background: black;
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.profile span {
+    margin-bottom: 10px;
+}
+
+
+.article-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244, 244, 244);
+    outline: 1px solid grey;
+}
+
+.article-row {
+    display: flex;
+    background-color: white;
+    border-left: 1px solid gray;
+    text-align: center;
+}
+
+.article-row input {
+    padding: 15px 5px;
+    height: 13px;
+    width: 396px;
+    flex-basis: 25%;
+    border: none;
+    outline: 1px solid gray;
+}
+
+.heading-table {
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.heading-table .header-row {
+    flex-basis: 25%;
+    padding: 22px;
+    text-align: left;
+    height: 50px;
+    padding: 8px;
+}
+.header-row:nth-child(1) {
+    border-left: 1px solid gray;
+}
+
+.header-row:nth-child(2) {
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+}
+.header-row:nth-child(3) {
+    border-right: 1px solid gray;
+}
+.header-row:nth-child(4) {
+    border-right: 1px solid gray;
+}
+.input-container {
+    position: relative;
+}
+.icon {
+position: absolute;
+right: 5px;
+bottom: 5px;
+font-size: 20px;
+}

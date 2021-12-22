@@ -30,7 +30,6 @@ const Details = () => {
             updatedUser.gamesBought.push(game)
             msg = 'Game has been bought.'
             const removeFromWishList = currentUser.wishlist.filter(e => e.objectId !== game.objectId)
-
              if (removeFromWishList) {
                 updatedUser.wishlist = removeFromWishList
             } 
@@ -48,7 +47,6 @@ const Details = () => {
         updatedUser.wishlist = [...currentUser.wishlist]
         updatedUser.wishlist.push(game)
         msg = 'Game has been wishlisted.'
-
         Backendless.UserService.update(updatedUser)
         .then(responseUpdate => {
         setCurrentUser(responseUpdate)
@@ -74,7 +72,8 @@ const Details = () => {
     }
 
     useEffect(() => {
-        Backendless.Data.of('Games').findById(params.id).then(g => {       
+        Backendless.Data.of('Games').findById(params.id).then(g => {
+            console.log(g)       
             setGame(g)
         })
     }, [])

@@ -1,6 +1,6 @@
 import Backendless from "backendless";
 export async function registerUser(user) {
-    let responseUser = ''
+   
     user.gamesBought = []
     user.wishlist = []
     user.cart = []
@@ -9,5 +9,5 @@ export async function registerUser(user) {
     return registeredUser
 }
 export async function loginUser(username, password) {
-   return await Backendless.UserService.login(username, password, true).then().catch(e => e)
+   return await Backendless.UserService.login(username, password, true).then().catch(e => {throw new Error(e)})
 }

@@ -25,7 +25,12 @@ const Login = () => {
     const submitHandler = (e) => {
         e.preventDefault()
   
-            toast.promise(loginUser(username,password), {
+        /*     loginUser(username,password).then(response => {
+                
+                setCurrentUser(response)
+                navigate("/")
+            }).catch(e => toast(e)) */
+             toast.promise(loginUser(username,password), {
                 pending: {
                     render() { 
                         return "Loading..."
@@ -42,14 +47,14 @@ const Login = () => {
                 },
                 error: {
                     render({data}) {
-                        console.log(data)
+                    
                         return `Oops, ${data}`
                     }
                 }
                 
-            }
+            } 
         
-        )
+        ) 
     }
     
 

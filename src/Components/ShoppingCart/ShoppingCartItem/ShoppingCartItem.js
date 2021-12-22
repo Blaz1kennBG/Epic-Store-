@@ -36,10 +36,10 @@ const ShoppingCartItem = ({game, removeHandler}) => {
                 {game.discount > 0 &&
                 <>
                 <span className={style['discount']}>{game.discount}%</span>
-                <span className={style["oldPrice"]}>{game.price}</span>
+                <span className={style["oldPrice"]}>{(game.price).toFixed(2)}</span>
                 </>
                 }
-                BGN {gamePrice}</div>
+                BGN {(gamePrice).toFixed(2)}</div>
             <div className={style["shopping-options"]}>
                 <span>Move to wishlist</span>
                 <span onClick={() => removeHandler(game)}>Remove</span>
