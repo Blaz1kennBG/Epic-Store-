@@ -18,3 +18,20 @@ body {
   max-width: 100vw;
   padding: 0;
 }
+
+.animate-bottom {
+  
+
+  animation-name: animatebottom;
+  animation-duration: 2s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}

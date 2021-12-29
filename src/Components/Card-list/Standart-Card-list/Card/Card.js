@@ -14,7 +14,7 @@ const Card = ({ game }) => {
                     to={`/details/${game.objectId}`}  > {game.title}</Link>
 
                 <span className={style['card-description']}>{game.developer} | {game.publisher}</span>
-                {game.isDiscounted &&
+                {game.discount > 0 &&
                     <div className={style['card-discount-container']}>
                         <div className={style['discount-number']}>
                             <span className={style["discount-percentage"]}>-{game.discount}%</span>
@@ -27,7 +27,7 @@ const Card = ({ game }) => {
                     </div>
                 }
 
-                {game.isDiscounted === false &&
+                {game.discount === 0 &&
                     (game.price > 0 ? <span className={style['card-price']}>{game.price} BGN</span>
                         : game.price === 0 ? <span className={style['card-price']}>Free</span>
                             : <span className={style['card-date']}>Available: {game.availableDate}</span>

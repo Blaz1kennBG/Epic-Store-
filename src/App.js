@@ -23,6 +23,7 @@ import UploadGame from './Components/Forms/UploadGame/UploadGame';
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import AdminPanel from './Components/AdminPanel/AdminPanel';
+import { useEffect, useState } from 'react';
 
 function GuardedRoute({ children }) {
   const user = useRecoilValue(userState)
@@ -39,13 +40,22 @@ function AdminGuard({children}) {
 }
 function App() {
 
-  
+  const [isReady, setReady] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setReady(true), 1000)
+  }, [])
 
   return (
-    <RecoilRoot>
+   
+  <RecoilRoot>
       <Router>
+        { isReady && 
+        <>
+        <div 
+        
+        className="container animate-bottom">
         <Navbar />
-        <div className="container">
 
           <Switch>
             <Route exact path="/" element={<CardContainer />} />
@@ -76,16 +86,16 @@ function App() {
               <Route path="adminPanel" element={
                 <AdminGuard>
                   <AdminPanel />
-                </AdminGuard>
-              }/>
+                </AdminGuard> }/>
 
               
             <Route path="*" element={<ErrorPage />} />
           </Switch>
 
         </div>
+        </>}
       </Router>
-    </RecoilRoot>
+    </RecoilRoot> 
   );
 }
 
