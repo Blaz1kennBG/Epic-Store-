@@ -1,9 +1,7 @@
-import { thumbnail } from '@cloudinary/url-gen/actions/resize'
-import Backendless from 'backendless'
-import { useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { uploadImage } from '../../../utils/cloudinary'
 import { uploadGame } from '../../../utils/gameService'
 import style from './UploadGame.module.css'
 
@@ -14,11 +12,12 @@ const UploadGame = () => {
     const [publisher, setPublisher] = useState('')
     const [genres, setGenres] = useState([])
     const [price, setPrice] = useState('')
-    const [discount, setDiscount] = useState(undefined)
+    const [discount, setDiscount] = useState(0)
     const [images, setImages] = useState([])
     const [gameLogo, setGameLogo] = useState(undefined)
     const [description, setDescription] = useState('')
     const [thumbnail, setGameThumbnail] = useState(undefined)
+    const [thumbnailPreview, setThumbnailPreview] = useState(undefined)
     const [isDiscounted, setIsDiscounted] = useState(false)
     const [isAvailable, setIsAvailable] = useState(true)
     const [availableDate, setAvailableDate] = useState('')
@@ -49,16 +48,19 @@ const UploadGame = () => {
                 }
             }
         })
-        
-     
-      
-        
-        
-      
 
     }
-
+    useEffect(() => {
+        
+        if (!thumbnailPreview) {
+            setThumbnailPreview(undefined)
+            return
+        }
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(thumbnailPreview)
+    }, [thumbnail])
     return (
+        <>
         <div className={style['form-container']} >
 
             <form className={style["box"]} onSubmit={submitHandler}>
@@ -73,13 +75,13 @@ const UploadGame = () => {
                     if (ev.key === ",") {
                         const _genres = [...genres]
                         _genres.push(ev.target.value)
-                        ev.target.value = ''
                         setGenres(_genres)
+                        console.log(ev.target.value)
                        
                     }
                 }}
                     defaultValue={genres} />
-                {genres.map(g => <div style={{ width: "100%" }} key={Math.random(0, 999)}>{g}</div>)}
+                {genres.map(g => <span style={{ width: "100%" }} key={Math.random(0, 999)}>{g}</span>)}
                 <input type="number" name="price" placeholder="Price 0 is free, below 0 is not released" onChange={(ev) => setPrice(ev.target.value)} value={price} required/>
 
                 <span style={{color: "white"}}>Game is Discounted?</span>
@@ -105,11 +107,50 @@ const UploadGame = () => {
                 <span style={{color: "white"}}>Game Logo</span>
                 <input type="file" name="gameLogo" required onChange={(ev) => setGameLogo(ev.target.files[0])}/>
                 <span style={{color: "white"}}>Game Thumbnail</span>
-                <input type="file" name="gameLogo" required onChange={(ev) => setGameThumbnail(ev.target.files[0])}/>
+                <input type="file" name="gameLogo" required onChange={(ev) => {
+                    setGameThumbnail(ev.target.files[0])
+                    const imagePreviewUrl = URL.createObjectURL(ev.target.files[0])
+                    setThumbnailPreview(imagePreviewUrl)
+                }
+            }/>
                 <input type="submit" name="submit" value="List the game" />
             </form>
-
+            
         </div>
+       <div className={style["card-list"]}>
+       <div className={style['card']}>
+         <div className={style['card-image']}>
+ 
+{             <img  src={thumbnailPreview ? thumbnailPreview : ""}/>}
+         </div>
+         <div className={style['card-content']}>
+             <span className={style['card-title']} style={{ color: "rgb(245,245,245)" }}
+                 > {title}</span>
+ 
+             <span className={style['card-description']}>{developer} | {publisher}</span>
+             {discount > 0 &&
+                 <div className={style['card-discount-container']}>
+                     <div className={style['discount-number']}>
+                         <span className={style["discount-percentage"]}>-{discount}%</span>
+                     </div>
+                     <div className={style["discount-prices"]}>
+                         <span className={style["card-discount"]}>BGN {price} </span>
+                         <span className={style["card-price"]}>BGN {(price - (price * (discount / 100))).toFixed(2)}</span>
+                     </div>
+ 
+                 </div>
+             }
+ 
+             {discount === 0 &&
+                 (price > 0 ? <span className={style['card-price']}>{price} BGN</span>
+                     : price === 0 ? <span className={style['card-price']}>Free</span>
+                         : <span className={style['card-date']}>Available: {availableDate}</span>
+                 )
+             }
+         </div>
+     </div>
+       </div>
+     </>
     )
 }
 export default UploadGame
