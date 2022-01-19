@@ -1,6 +1,6 @@
 # Epic Games Store project
 
-Will go offline in a week because it is using Backendless as BaaS and it has only 30 day trial.
+Will go offline in a week because it is using Backendless as BaaS and it has only 30 day trial. Offline as of 19/01/2022
 
 # Tech Stack ReactJS/Cloudinary/Backendless.
 
